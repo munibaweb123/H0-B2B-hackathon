@@ -3,7 +3,7 @@
 **Branch:** `feature/frontend/foundation`
 **Depends on:** `feature/backend/foundation`
 **Effort:** ~2h
-**Status:** pending
+**Status:** complete
 
 ---
 
@@ -148,17 +148,17 @@ src/app/
 
 ## Definition of Done
 
-- [ ] `frontend/` directory exists with Next.js 14 App Router scaffold
-- [ ] `tailwind.config.ts` has all Editorial Elegance color tokens; `globals.css` overrides Shadcn variables
-- [ ] Google Fonts (Playfair Display + DM Sans) load in browser
-- [ ] Shadcn/ui components init'd; `Button`, `Card`, `Badge` render with correct styling
-- [ ] `useAuth()` hook returns user after page load when valid token is in localStorage
-- [ ] `apiFetch` sends `Authorization: Bearer` header; returns typed response; throws on 4xx/5xx
-- [ ] `(app)/layout.tsx` renders Sidebar + TopNav shell
-- [ ] Sidebar shows dark plum background; active nav item shows blush left border
-- [ ] Unauthenticated visit to `/dashboard` redirects to `/login`
-- [ ] No TypeScript errors (`tsc --noEmit` passes)
-- [ ] Dev server starts with `npm run dev` and loads at `localhost:3000`
+- [x] `frontend/` directory exists with Next.js 14 App Router scaffold
+- [x] `tailwind.config.ts` has all Editorial Elegance color tokens; `globals.css` overrides Shadcn variables
+- [x] Google Fonts (Playfair Display + DM Sans) load in browser
+- [x] Shadcn/ui components init'd; `Button`, `Card`, `Badge` render with correct styling
+- [x] `useAuth()` hook returns user after page load when valid token is in localStorage
+- [x] `apiFetch` sends `Authorization: Bearer` header; returns typed response; throws on 4xx/5xx
+- [x] `(app)/layout.tsx` renders Sidebar + TopNav shell
+- [x] Sidebar shows dark plum background; active nav item shows blush left border
+- [x] Unauthenticated visit to `/dashboard` redirects to `/login`
+- [x] No TypeScript errors (`tsc --noEmit` passes)
+- [x] Dev server starts with `npm run dev` and loads at `localhost:3000`
 
 ---
 
