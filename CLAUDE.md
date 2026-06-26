@@ -254,3 +254,57 @@ Agent opens chat → types question in English or Urdu → PropFlow answers base
 - Multi-tenant isolation verifiable
 - Dashboard shows real numbers from seeded data
 - Judges can see autonomous deal closer fire in real time
+
+---
+
+### Established in Phase FE-01 — Frontend Foundation
+
+**Folder structure**
+```
+frontend/src/
+├── app/
+│   ├── (auth)/     # Public pages — centered card layout, no sidebar
+│   ├── (app)/      # Protected pages — AppLayout (sidebar + topnav), auth-guarded
+│   ├── layout.tsx  # Root: AuthProvider + Toaster + Google Fonts
+│   ├── error.tsx   # Full-page error boundary with retry
+│   └── loading.tsx # Global loading skeleton
+├── components/
+│   ├── layout/     # AppLayout, Sidebar, TopNav
+│   └── ui/         # Shadcn/ui primitives (16 components)
+├── hooks/          # use-toast (Shadcn)
+└── lib/
+    ├── api.ts      # apiFetch + apiGet/apiPost/apiPatch/apiDelete
+    ├── auth.tsx    # AuthProvider + useAuth() hook
+    └── utils.ts    # cn() helper (clsx + tailwind-merge)
+```
+
+**Pinned versions (do not upgrade)**
+- `next`: `14.2.35`
+- `tailwindcss`: `^3.4.1` (Tailwind v3 — Shadcn/ui 2.x targets v3, NOT v4)
+- `shadcn`: `4.12.0` (components generated with `style: "default"`)
+
+**Design tokens (tailwind.config.ts)**
+- `maroon.dark` `#33063C` / `maroon.medium` `#5C1169` / `maroon.light` `#7d4c84`
+- `cream` `#fdf9ed` / `cream.card` `#fef9ee`
+- `blush` `#e8a8b4` / `pink.accent` `#d4636b` / `gold` `#c9a84c`
+- `text.primary` `#1a1a1a` / `text.muted` `#6b7280`
+- Fonts: `font-serif` → Playfair Display, `font-sans` → DM Sans (via `next/font/google`)
+
+**Auth pattern**
+- JWT stored in `localStorage` under key `propflow_token`
+- Auth redirect is client-side only (localStorage unreadable in middleware) — `(app)/layout.tsx` calls `useAuth()` and does `router.replace('/login')` if no user after load
+- `middleware.ts` exists as a stub for future cookie-based upgrades; it currently passes all requests through
+
+**API client**
+- `apiFetch` reads token from localStorage, prepends `NEXT_PUBLIC_API_URL`, throws `ApiError` on non-2xx
+- All typed helpers re-export from `@/lib/api`
+
+**WSL2 / NTFS constraint**
+- `npm install` and `npx shadcn` fail with `EPERM chmod` on `/mnt/d/` paths
+- Workaround: `node_modules` is a symlink → `/home/munibapc/.npm-modules/propflow-frontend` (Linux ext4)
+- All npm/npx commands must be run from WSL terminal pointed at `/mnt/d/quarter-5/H0-B2B-hackathon/frontend/`
+- Do **not** add `node_modules` to git or copy it to Windows filesystem
+
+**Dev server**
+- Start: `npm run dev` from `frontend/` directory
+- Env: `NEXT_PUBLIC_API_URL=http://localhost:8000` in `frontend/.env.local`
