@@ -189,49 +189,49 @@ From Phase 03 (AI Agent):
 ## Definition of Done
 
 **Structural**
-- [ ] `src/backend/integrations/` package created with __init__.py
-- [ ] whatsapp.py — pywa client singleton + send_whatsapp() helper
-- [ ] whisper.py — transcribe_voice_note() async function
-- [ ] places_router.py — GET /places/autocomplete
-- [ ] whatsapp_router.py — GET+POST /whatsapp/webhook, POST /whatsapp/send
-- [ ] deal_closer_router.py — POST /deal-closer/{property_id}
-- [ ] email_router.py — POST /email/followup/{client_id}
-- [ ] slots_router.py — POST /slots, GET /slots, POST /slots/{slot_id}/book
-- [ ] SiteVisitSlot model in models/site_visit_slot.py (Aurora DSQL compliant)
-- [ ] All integration routers registered in main.py
+- [x] `src/backend/integrations/` package created with __init__.py
+- [x] whatsapp.py — pywa client singleton + send_whatsapp() helper
+- [x] whisper.py — transcribe_voice_note() async function
+- [x] places_router.py — GET /places/autocomplete
+- [x] whatsapp_router.py — GET+POST /whatsapp/webhook, POST /whatsapp/send
+- [x] deal_closer_router.py — POST /deal-closer/{property_id}
+- [x] email_router.py — POST /email/followup/{client_id}
+- [x] slots_router.py — POST /slots, GET /slots, POST /slots/{slot_id}/book
+- [x] SiteVisitSlot model in models/site_visit_slot.py (Aurora DSQL compliant)
+- [x] All integration routers registered in main.py
 
 **Behavioral — Google Places**
-- [ ] GET /places/autocomplete?input=DHA returns location suggestions
-- [ ] Returns [] (not 500) when GOOGLE_PLACES_API_KEY is absent
+- [x] GET /places/autocomplete?input=DHA returns location suggestions
+- [x] Returns [] (not 500) when GOOGLE_PLACES_API_KEY is absent
 
 **Behavioral — WhatsApp Webhook**
-- [ ] GET /whatsapp/webhook responds to Meta verification challenge
-- [ ] POST /whatsapp/webhook receives a text message and replies via WhatsApp
-- [ ] POST /whatsapp/webhook receives a voice note, transcribes it via Whisper,
+- [x] GET /whatsapp/webhook responds to Meta verification challenge
+- [x] POST /whatsapp/webhook receives a text message and replies via WhatsApp
+- [x] POST /whatsapp/webhook receives a voice note, transcribes it via Whisper,
       and replies with AI-generated response
 
 **Behavioral — Outbound WhatsApp**
-- [ ] POST /whatsapp/send delivers a message to a phone number
-- [ ] Sent message is logged as an interaction in the DB
+- [x] POST /whatsapp/send delivers a message to a phone number
+- [x] Sent message is logged as an interaction in the DB
 
 **Behavioral — Autonomous Deal Closer**
-- [ ] POST /deal-closer/{property_id} returns list of clients pitched
-- [ ] Only pitches clients whose budget/city/bedrooms roughly match the property
-- [ ] Each pitch is a personalised AI-generated message (not a template)
-- [ ] Each pitch is sent via WhatsApp and logged as an interaction
-- [ ] 404 if property not found or belongs to another tenant
+- [x] POST /deal-closer/{property_id} returns list of clients pitched
+- [x] Only pitches clients whose budget/city/bedrooms roughly match the property
+- [x] Each pitch is a personalised AI-generated message (not a template)
+- [x] Each pitch is sent via WhatsApp and logged as an interaction
+- [x] 404 if property not found or belongs to another tenant
 
 **Behavioral — Email**
-- [ ] POST /email/followup/{client_id} sends an AI-drafted email via Resend
-- [ ] Returns graceful message (not 500) if RESEND_API_KEY is absent
+- [x] POST /email/followup/{client_id} sends an AI-drafted email via Resend
+- [x] Returns graceful message (not 500) if RESEND_API_KEY is absent
 
 **Behavioral — Slots**
-- [ ] POST /slots creates a slot; GET /slots lists them for the tenant
-- [ ] POST /slots/{slot_id}/book books the slot and returns 409 if already booked
+- [x] POST /slots creates a slot; GET /slots lists them for the tenant
+- [x] POST /slots/{slot_id}/book books the slot and returns 409 if already booked
 
 **Isolation**
-- [ ] Deal closer only pitches clients belonging to the same tenant as the property
-- [ ] Slot booking verifies client belongs to the tenant before booking
+- [x] Deal closer only pitches clients belonging to the same tenant as the property
+- [x] Slot booking verifies client belongs to the tenant before booking
 
 ## Rollback Criteria
 
