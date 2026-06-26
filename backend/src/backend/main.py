@@ -9,10 +9,16 @@ import backend.models.team_member  # noqa: F401
 import backend.models.property  # noqa: F401
 import backend.models.client  # noqa: F401
 import backend.models.interaction_log  # noqa: F401
+import backend.models.site_visit_slot  # noqa: F401
 
 from backend.routers import auth
 from backend.routers import properties, clients, dashboard
 from backend.ai.router import router as ai_router
+from backend.integrations.places_router import router as places_router
+from backend.integrations.whatsapp_router import router as whatsapp_router
+from backend.integrations.deal_closer_router import router as deal_closer_router
+from backend.integrations.email_router import router as email_router
+from backend.integrations.slots_router import router as slots_router
 
 
 @asynccontextmanager
@@ -41,6 +47,11 @@ app.include_router(properties.router)
 app.include_router(clients.router)
 app.include_router(dashboard.router)
 app.include_router(ai_router)
+app.include_router(places_router)
+app.include_router(whatsapp_router)
+app.include_router(deal_closer_router)
+app.include_router(email_router)
+app.include_router(slots_router)
 
 
 @app.get("/health")
