@@ -105,6 +105,42 @@ backend/src/backend/
 
 ---
 
+### Established in Phase 03 — AI Agent
+
+**Folder structure additions**
+```
+backend/src/backend/
+└── ai/         # AI layer — agent definition, tools, router (isolated from routers/ and services/)
+```
+
+**OpenAI Agents SDK patterns**
+- Single `propflow_agent` (gpt-4o) with all tools registered; `_direct_agent` (no tools) for match/draft-followup where all data is passed in prompt
+- Tools use `RunContextWrapper[AgentContext]` — context (tenant_id, session, language) injected per request via `Runner.run(..., context=AgentContext(...))`; LLM cannot forge tenant_id
+- Agent instructions are a callable `_build_instructions(ctx, agent) -> str` — language instruction injected dynamically based on `ctx.context.language`
+- `Runner.run()` (not stream) for all calls — no streaming
+- All AI endpoints catch OpenAI errors and return 503 (never let auth/quota errors bubble as 500)
+
+**Language detection**
+- `detect_language(text)` in `ai/agent.py` — checks Unicode range `؀`–`ۿ` (U+0600–U+06FF)
+- Call before `Runner.run()` and set `AgentContext.language` — do not ask the LLM to detect language
+
+**Tavily web search**
+- Wrapped in `asyncio.wait_for(..., timeout=5.0)` — always returns gracefully even on timeout
+- If `TAVILY_API_KEY` is empty, tool returns a "not configured" string; agent continues without crashing
+- Import `TavilyClient` inside the tool function — not at module level (optional dependency)
+
+**Pinned versions (do not upgrade during hackathon)**
+- `openai-agents==0.17.7` (installed as `openai-agents>=0.0.19`)
+- `tavily-python==0.7.26` (installed as `tavily-python>=0.5.0`)
+
+**AI endpoints contract (downstream phases must not break)**
+- `POST /ai/chat` → `{reply: str, tool_calls_made: [str]}`
+- `POST /ai/match/{client_id}` → `{client_id: str, matches: [{property_id, score, reason}]}`
+- `POST /ai/draft-followup/{client_id}` → `{message_text: str, channel: str}`
+- `POST /ai/search` → `{results: [dict], summary: str}`
+
+---
+
 ## Constraints
 - Hackathon build — hours to 1 day, demo must work end-to-end
 - Multi-tenant: each agency's data is fully isolated
