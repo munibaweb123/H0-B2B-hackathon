@@ -3,7 +3,7 @@
 <html class="h-full" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>RealtyFlow PK - AI Chat</title>
+<title>PropFlow AI - AI Chat</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -106,19 +106,25 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: theme('colors.outline-variant'); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: theme('colors.outline'); }
-    </style>
+    
+        .bg-maroon-dark { background-color: #33063C; }
+        .text-maroon-dark { color: #33063C; }
+        .border-maroon-dark { border-color: #33063C; }
+        .bg-maroon-light { background-color: #63356a; }
+        .text-maroon-light { color: #63356a; }
+        </style>
 </head>
 <body class="h-full flex overflow-hidden font-body-md text-body-md text-on-surface antialiased bg-background">
 <!-- SideNavBar -->
-<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full w-64 bg-secondary dark:bg-on-secondary-fixed-variant shadow-lg shadow-xl shadow-secondary/10 z-50">
+<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full w-64 bg-maroon-dark shadow-lg shadow-xl shadow-black/20 z-50">
 <div class="flex flex-col h-full py-8 px-4">
 <!-- Header -->
 <div class="mb-10 px-4">
 <div class="flex items-center gap-3">
 <img class="w-10 h-10 rounded-lg object-cover bg-surface" data-alt="A sophisticated, minimalist logo for a premium real estate CRM. The logo features a stylized geometric house icon in a deep plum color, set against a clean white background. The design is sleek, modern, and high-end, reflecting an editorial elegance style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwOMkgxJlfa_dwejaahfj-W1-bUt4Q8U1IO8WW4133kTVR9ptwLVt7tJR4vvtCdhwUI5GED60kDgWAa8yQcy5rzBOHBU8JbKwYYfpByVDRHfl98yAH0I9PdZu08JEh1Ozz0A_kF7rvMosZitbmtZW-njcnT3WMXLFaLV4WEXpeLZq5DNbWbGZspfvvcmoJvoIBOYlmMIaxX3SzGY1J7BX_aGPU_sIgVeCUjrHxQRgcQJTH5qoYJSaQTMy9l6muOWuhQpDzYUijaVA"/>
 <div>
-<h1 class="font-headline-md text-headline-md text-on-secondary">RealtyFlow PK</h1>
-<p class="font-label-sm text-label-sm text-on-secondary/80">Premium CRM</p>
+<h1 class="font-headline-md text-headline-md text-on-secondary">PropFlow AI</h1>
+<p class="font-label-sm text-label-sm text-on-secondary/80">Elite Real Estate CRM</p>
 </div>
 </div>
 </div>
@@ -149,7 +155,7 @@
 </a>
 </li>
 <li>
-<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-lg px-4 py-3 font-bold transition-all duration-200 active:scale-95" href="#">
+<a class="flex items-center gap-3 bg-maroon-light text-white rounded-lg border-l-4 border-white px-4 py-3 font-bold transition-all duration-200 active:scale-95" href="#">
 <span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
 <span class="font-body-md text-label-md">AI Chat</span>
 </a>
@@ -183,7 +189,7 @@
 <button class="text-on-surface-variant hover:text-secondary transition-colors">
 <span class="material-symbols-outlined">menu</span>
 </button>
-<span class="font-headline-md text-headline-md text-secondary dark:text-secondary-fixed">RealtyFlow PK</span>
+<span class="font-headline-md text-headline-md text-secondary dark:text-secondary-fixed">PropFlow AI</span>
 </div>
 <div class="hidden lg:flex items-center flex-1">
 <h2 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed">PropFlow AI Assistant</h2>

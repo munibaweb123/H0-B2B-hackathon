@@ -3,7 +3,7 @@
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>RealtyFlow PK - Add Property</title>
+<title>PropFlow AI - Add Property</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -106,22 +106,28 @@
         .material-symbols-outlined[data-weight="fill"] {
             font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-    </style>
+    
+        .bg-maroon-dark { background-color: #33063C; }
+        .text-maroon-dark { color: #33063C; }
+        .border-maroon-dark { border-color: #33063C; }
+        .bg-maroon-light { background-color: #63356a; }
+        .text-maroon-light { color: #63356a; }
+        </style>
 </head>
 <body class="bg-background text-on-background font-body-md min-h-screen flex antialiased">
 <!-- SideNavBar -->
-<aside class="hidden md:flex flex-col bg-secondary dark:bg-on-secondary-fixed-variant fixed left-0 top-0 h-full w-64 shadow-xl shadow-secondary/10 z-50">
+<aside class="hidden md:flex flex-col bg-maroon-dark fixed left-0 top-0 h-full w-64 shadow-xl shadow-black/20 z-50">
 <div class="flex flex-col h-full py-8 px-4">
 <div class="mb-10 px-4">
-<h1 class="font-headline-md text-headline-md text-on-secondary">RealtyFlow PK</h1>
-<p class="font-body-md text-label-md text-on-secondary/70 mt-1">Premium CRM</p>
+<h1 class="font-headline-md text-headline-md text-on-secondary">PropFlow AI</h1>
+<p class="font-body-md text-label-md text-on-secondary/70 mt-1">Elite Real Estate CRM</p>
 </div>
 <nav class="flex-1 space-y-2">
 <a class="flex items-center gap-3 text-on-secondary/80 hover:text-on-secondary px-4 py-3 transition-colors hover:bg-on-secondary-fixed-variant/50 transition-all duration-200 active:scale-95 font-body-md text-label-md" href="#">
 <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
                     Dashboard
                 </a>
-<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-lg px-4 py-3 font-bold font-body-md text-label-md transition-all duration-200 active:scale-95" href="#">
+<a class="flex items-center gap-3 bg-maroon-light text-white rounded-lg border-l-4 border-white px-4 py-3 font-bold font-body-md text-label-md transition-all duration-200 active:scale-95" href="#">
 <span class="material-symbols-outlined" data-icon="home_work">home_work</span>
                     Properties
                 </a>
