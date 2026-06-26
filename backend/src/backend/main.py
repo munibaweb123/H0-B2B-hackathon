@@ -12,6 +12,7 @@ import backend.models.interaction_log  # noqa: F401
 
 from backend.routers import auth
 from backend.routers import properties, clients, dashboard
+from backend.ai.router import router as ai_router
 
 
 @asynccontextmanager
@@ -39,6 +40,7 @@ app.include_router(auth.router)
 app.include_router(properties.router)
 app.include_router(clients.router)
 app.include_router(dashboard.router)
+app.include_router(ai_router)
 
 
 @app.get("/health")
