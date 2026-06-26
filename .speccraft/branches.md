@@ -7,4 +7,4 @@
 | 01 — Foundation | `feature/backend/foundation` | — | ✅ complete |
 | 02 — Core CRM | `feature/backend/core-crm` | `feature/backend/foundation` | ✅ complete |
 | 03 — AI Agent | `feature/backend/ai-agent` | `feature/backend/core-crm` | ✅ complete |
-| 04 — Integrations | `feature/backend/integrations` | `feature/backend/ai-agent` | pending |
+| 04 — Integrations | `feature/backend/integrations` | `feature/backend/ai-agent` | ✅ complete |

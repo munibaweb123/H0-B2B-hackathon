@@ -141,6 +141,50 @@ backend/src/backend/
 
 ---
 
+### Established in Phase 04 — Integrations
+
+**Folder structure additions**
+```
+backend/src/backend/
+└── integrations/   # External-world connectors — WhatsApp, Whisper, Places, email, deal closer, slots
+```
+
+**WhatsApp integration (no pywa — direct Meta Graph API via httpx)**
+- `send_whatsapp(to, message)` — async httpx POST to Meta Graph API; silently no-ops if credentials absent
+- `verify_signature(payload, signature)` — HMAC-SHA256 against `WHATSAPP_APP_SECRET`; skip verification if secret empty (dev mode)
+- Webhook handler has no authenticated user — uses first agency in DB as demo tenant; for multi-tenant production, look up agency by `phone_number_id`
+- pywa was NOT used — direct httpx calls are simpler and fully async
+
+**Whisper transcription**
+- `transcribe_voice_note(media_id)` — two-step: GET Meta media URL (Bearer token), download audio bytes, POST to `openai.audio.transcriptions` with `model="whisper-1"`
+- Audio format passed as `("audio.ogg", io.BytesIO(bytes), "audio/ogg")` — Whisper accepts OGG/Opus from WhatsApp natively
+
+**Autonomous deal closer pattern**
+- POST /deal-closer/{property_id} — synchronous, inline, no background tasks
+- Filter: `budget_max >= price × 0.85` AND city substring match AND `bedrooms_needed == bedrooms` (None = any)
+- Pitches generated concurrently with `asyncio.gather()` using `_direct_agent` from Phase 03
+- Each pitch logged as `InteractionType.whatsapp` via `interaction_service.log_interaction()`
+
+**Resend email**
+- `resend.Emails.send()` is sync — always wrap in `asyncio.to_thread()`
+- Sender address: `"PropFlow <onboarding@resend.dev>"` (Resend sandbox domain for testing)
+- Returns `{sent: false, reason: "..."}` (not 500) when key absent or send fails
+
+**Google Places proxy**
+- `GET /places/autocomplete?input=<text>` — passes `components=country:pk` to restrict to Pakistan
+- Falls back to `[]` (not error) when `GOOGLE_PLACES_API_KEY` is absent
+
+**SiteVisitSlot model**
+- Fields: `id, tenant_id, agent_id, slot_datetime, is_booked (bool), booked_by_client_id (Optional[UUID]), created_at`
+- `is_booked` stored as native boolean — Aurora DSQL supports Boolean without special handling
+- Double-booking returns **409** (not 400) — downstream must handle 409 specifically
+
+**Pinned versions (do not upgrade)**
+- `httpx==0.28.1`
+- `resend==2.32.2`
+
+---
+
 ## Constraints
 - Hackathon build — hours to 1 day, demo must work end-to-end
 - Multi-tenant: each agency's data is fully isolated
