@@ -14,10 +14,10 @@ Never pick a stack component without asking first.
 ---
 
 ## Tech Stack
-- **Frontend:** Next.js (scaffolded via v0.dev)
+- **Frontend:** Next.js (built with Claude Code, deployed on Vercel — v0.dev not required)
 - **Backend:** Python, FastAPI (`uv init backend --package`), built with Claude Code
 - **AI Framework:** OpenAI Agents SDK (`openai-agents`) with OpenAI key
-- **Database:** AWS RDS PostgreSQL (multi-tenant via `tenant_id` on all tables)
+- **Database:** Amazon Aurora DSQL (serverless, PostgreSQL-compatible, IAM auth via boto3)
 - **Voice Transcription:** OpenAI Whisper API (same key, supports Urdu, ~$0.006/min)
 - **WhatsApp:** Meta Business API — testing credentials (sandbox, sufficient for demo)
 - **Email:** Resend (free tier, 100 emails/day, Python SDK)
@@ -60,6 +60,48 @@ Use `bcrypt.hashpw` / `bcrypt.checkpw` directly (passlib removed due to bcrypt 4
 
 **WhatsApp**
 Using `pywa` library. Credentials: access token, verify token, app ID/secret, phone number ID, business account ID, callback URL, API version — all in `.env`
+
+---
+
+### Established in Phase 02 — Core CRM
+
+**Folder structure additions**
+```
+backend/src/backend/
+└── services/   # Business logic layer — routers call services, never write DB logic in routers
+```
+
+**Aurora DSQL constraints (do not violate — these will crash DDL)**
+- No `CREATE TYPE ... AS ENUM` → all enum fields use `sa_column=Column(String)`
+- No `CREATE INDEX` (sync) → never use `index=True` on any field
+- No `UNIQUE` constraints → never use `unique=True`; enforce uniqueness in application code
+- No `FOREIGN KEY` constraints → never use `foreign_key=` in Field(); enforce in service layer
+- No multiple DDL in one transaction → `create_tables()` creates each table in its own `engine.begin()`
+- `checkfirst=True` is extremely slow on DSQL (~4s per table) — use try/except "already exists" instead
+
+**Aurora DSQL connection**
+- IAM token via `boto3.client("dsql").generate_db_connect_admin_auth_token()`
+- First boto3 call takes ~22s (SDK init) — pre-warmed in `init_db()` before server accepts traffic
+- Token cached in `_token_cache` dict with 900s lifetime; refreshed 60s before expiry
+- `_dsql_client` is a module-level singleton — do not recreate per request
+- Connection string: `postgresql+asyncpg://admin@<endpoint>:5432/postgres` with `ssl=True`
+- `pool_recycle=800` ensures connections are recycled before the 900s token expires
+- `do_connect` SQLAlchemy event injects cached token as password on each new connection
+
+**`create_tables()` vs `init_db()`**
+- `create_tables()` — one-time first-deploy function; run manually, not on server startup
+- `init_db()` — called on every startup; only verifies connectivity (SELECT 1) after pre-warming token
+
+**Services pattern**
+- All DB logic lives in `services/<entity>_service.py`
+- Services raise `HTTPException` directly (no re-wrapping in routers)
+- `tenant_id` always comes from `get_current_user`, never from request body
+- Returning 404 (not 403) when a record exists under a different tenant — never leak existence
+
+**Stage transitions**
+- `STAGE_ORDER` list in `models/client.py` defines legal order
+- Transition valid only if `new_idx == current_idx + 1` — no skipping, no going backward
+- Validation lives in `client_service.update_stage()`, not in the router
 
 ---
 
