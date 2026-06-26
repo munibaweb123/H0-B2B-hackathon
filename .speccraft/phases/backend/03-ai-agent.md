@@ -137,39 +137,39 @@ to control reply language. No external library needed.
 ## Definition of Done
 
 **Structural**
-- [ ] `src/backend/ai/` package created with `agent.py`, `tools.py`, `router.py`
-- [ ] Agent defined with system prompt, tools registered
-- [ ] `detect_language()` utility implemented
-- [ ] AI router registered in `main.py`
+- [x] `src/backend/ai/` package created with `agent.py`, `tools.py`, `router.py`
+- [x] Agent defined with system prompt, tools registered
+- [x] `detect_language()` utility implemented
+- [x] AI router registered in `main.py`
 
 **Behavioral — Property Matching**
-- [ ] POST /ai/match/{client_id} → returns ranked list of matching properties
+- [x] POST /ai/match/{client_id} → returns ranked list of matching properties
       with score and reason for each; empty list if no properties exist
-- [ ] Matching respects tenant isolation — only tenant's own properties ranked
+- [x] Matching respects tenant isolation — only tenant's own properties ranked
 
 **Behavioral — AI Chat**
-- [ ] POST /ai/chat → returns a coherent reply using agency data
-- [ ] English input → English reply
-- [ ] Urdu script input → Roman Urdu reply
-- [ ] Agent correctly uses query_properties and query_clients tools when asked
+- [x] POST /ai/chat → returns a coherent reply using agency data
+- [x] English input → English reply
+- [x] Urdu script input → Roman Urdu reply
+- [x] Agent correctly uses query_properties and query_clients tools when asked
       questions about listings or leads
 
 **Behavioral — Follow-up Drafting**
-- [ ] POST /ai/draft-followup/{client_id} → returns personalized message text
+- [x] POST /ai/draft-followup/{client_id} → returns personalized message text
       and suggested channel (whatsapp/email)
-- [ ] Message references client's name, stage, and relevant property details
+- [x] Message references client's name, stage, and relevant property details
 
 **Behavioral — Natural Language Search**
-- [ ] POST /ai/search → free-text query returns filtered property results
-- [ ] "3-bed DHA Lahore under 80 lakh" extracts correct filters and returns
+- [x] POST /ai/search → free-text query returns filtered property results
+- [x] "3-bed DHA Lahore under 80 lakh" extracts correct filters and returns
       matching properties from the tenant's listings
 
 **Behavioral — Web Search**
-- [ ] POST /ai/chat with a query about external listings triggers Tavily tool
-- [ ] If TAVILY_API_KEY is empty, agent responds gracefully without crashing
+- [x] POST /ai/chat with a query about external listings triggers Tavily tool
+- [x] If TAVILY_API_KEY is empty, agent responds gracefully without crashing
 
 **Isolation**
-- [ ] Tool calls scoped by tenant_id — a query from Tenant A never returns
+- [x] Tool calls scoped by tenant_id — a query from Tenant A never returns
       Tenant B's properties or clients
 
 ## Rollback Criteria
