@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PropFlow AI - Pipeline</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+        /* Custom Scrollbar for Kanban Board */
+        .kanban-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+        .kanban-scroll::-webkit-scrollbar-track {
+            background: #f6f7e9; /* primary-container */
+            border-radius: 4px;
+        }
+        .kanban-scroll::-webkit-scrollbar-thumb {
+            background: #c7c7be; /* outline-variant */
+            border-radius: 4px;
+        }
+        .kanban-scroll::-webkit-scrollbar-thumb:hover {
+            background: #777870; /* outline */
+        }
+        
+        /* Drag and Drop visual hints */
+        .kanban-column {
+            min-height: calc(100vh - 180px);
+        }
+        .kanban-card {
+            cursor: grab;
+        }
+        .kanban-card:active {
+            cursor: grabbing;
+        }
+    </style>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-container-highest": "#e6e2d6",
+                "surface-container-high": "#ece8dc",
+                "background": "#fdf9ed",
+                "outline-variant": "#c7c7be",
+                "inverse-surface": "#313128",
+                "on-secondary-container": "#78487f",
+                "tertiary-fixed-dim": "#e2c289",
+                "tertiary-container": "#fff4e7",
+                "surface-container": "#f1eee1",
+                "surface-container-lowest": "#ffffff",
+                "on-tertiary": "#ffffff",
+                "surface-container-low": "#f7f4e7",
+                "on-surface-variant": "#464741",
+                "tertiary-fixed": "#ffdea5",
+                "surface-dim": "#dddace",
+                "secondary-fixed": "#ffd6ff",
+                "on-error-container": "#93000a",
+                "on-tertiary-fixed": "#261900",
+                "on-primary-fixed-variant": "#45483e",
+                "on-tertiary-container": "#866c3b",
+                "inverse-on-surface": "#f4f1e4",
+                "surface-tint": "#5d5f55",
+                "surface-variant": "#e6e2d6",
+                "secondary": "#7d4c84",
+                "secondary-container": "#f9befd",
+                "error": "#ba1a1a",
+                "inverse-primary": "#c6c8ba",
+                "tertiary": "#735b2b",
+                "on-error": "#ffffff",
+                "outline": "#777870",
+                "on-primary-container": "#6f7166",
+                "surface-bright": "#fdf9ed",
+                "primary-fixed": "#e2e4d6",
+                "on-surface": "#1c1c14",
+                "on-primary-fixed": "#1a1d14",
+                "on-secondary-fixed-variant": "#63356a",
+                "on-secondary-fixed": "#32053b",
+                "primary": "#5d5f55",
+                "primary-fixed-dim": "#c6c8ba",
+                "surface": "#fdf9ed",
+                "primary-container": "#f6f7e9",
+                "on-primary": "#ffffff",
+                "on-secondary": "#ffffff",
+                "on-tertiary-fixed-variant": "#594316",
+                "secondary-fixed-dim": "#eeb3f2",
+                "on-background": "#1c1c14",
+                "error-container": "#ffdad6",
+                "success": "#059669"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "margin-mobile": "20px",
+                "container-max-width": "1200px",
+                "container-max": "1440px",
+                "unit": "8px",
+                "gutter": "24px",
+                "margin-desktop": "64px"
+        },
+        "fontFamily": {
+                "headline-md": [
+                        "Playfair Display"
+                ],
+                "label-sm": [
+                        "DM Sans"
+                ],
+                "headline-lg-mobile": [
+                        "Playfair Display"
+                ],
+                "body-lg": [
+                        "DM Sans"
+                ],
+                "display-lg": [
+                        "Playfair Display"
+                ],
+                "headline-lg": [
+                        "Playfair Display"
+                ],
+                "body-md": [
+                        "DM Sans"
+                ],
+                "label-md": [
+                        "DM Sans"
+                ],
+                "title-lg": [
+                        "DM Sans"
+                ],
+                "code": [
+                        "monospace"
+                ]
+        },
+        "fontSize": {
+                "headline-md": [
+                        "28px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "32px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "display-lg": [
+                        "56px",
+                        {
+                                "lineHeight": "1.1",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-lg": [
+                        "40px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "1.4",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "title-lg": ["18px", { "lineHeight": "24px", "fontWeight": "600" }]
+        }
+},
+    },
+  }
+</script>
+</head>
+<body class="bg-primary-container text-on-surface font-body-md antialiased overflow-hidden">
+<!-- Global Layout Wrapper -->
+<div class="flex h-screen w-full">
+<!-- SideNavBar (Shared Component) -->
+<nav class="w-[260px] h-full fixed left-0 top-0 bg-on-secondary-fixed dark:bg-on-secondary-fixed border-r border-outline-variant flex flex-col h-full z-50">
+<!-- Header -->
+<div class="p-gutter flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined font-bold text-headline-md">real_estate_agent</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md text-white m-0">PropFlow AI</h1>
+<p class="font-label-md text-label-md text-tertiary-fixed opacity-80 m-0">Elite Real Estate CRM</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<ul class="flex-1 px-3 mt-4 space-y-1 overflow-y-auto">
+<!-- Dashboard -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-tertiary-fixed hover:bg-secondary/50 transition-colors font-body-md text-body-md hover:bg-secondary transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                        Dashboard
+                    </a>
+</li>
+<!-- Properties -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-tertiary-fixed hover:bg-secondary/50 transition-colors font-body-md text-body-md hover:bg-secondary transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">real_estate_agent</span>
+                        Properties
+                    </a>
+</li>
+<!-- Clients -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-tertiary-fixed hover:bg-secondary/50 transition-colors font-body-md text-body-md hover:bg-secondary transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">groups</span>
+                        Clients
+                    </a>
+</li>
+<!-- Pipeline (ACTIVE) -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded bg-secondary text-white border-l-4 border-white font-body-md text-body-md hover:bg-secondary transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+                        Pipeline
+                    </a>
+</li>
+<!-- AI Chat -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-tertiary-fixed hover:bg-secondary/50 transition-colors font-body-md text-body-md hover:bg-secondary transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+                        AI Chat
+                    </a>
+</li>
+<!-- Site Visits -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-tertiary-fixed hover:bg-secondary/50 transition-colors font-body-md text-body-md hover:bg-secondary transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+                        Site Visits
+                    </a>
+</li>
+<!-- WhatsApp -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-tertiary-fixed hover:bg-secondary/50 transition-colors font-body-md text-body-md hover:bg-secondary transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">chat</span>
+                        WhatsApp
+                    </a>
+</li>
+</ul>
+<!-- Settings & CTA -->
+<div class="p-4 mt-auto space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded text-tertiary-fixed hover:bg-secondary/50 transition-colors font-body-md text-body-md hover:bg-secondary transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+<button class="w-full bg-white text-on-secondary-fixed font-title-lg text-title-lg py-3 rounded hover:bg-tertiary-fixed transition-colors">
+                    Add New Listing
+                </button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-full ml-[260px] relative">
+<!-- TopAppBar (Shared Component) -->
+<header class="h-16 w-full sticky top-0 z-40 bg-surface dark:bg-surface border-b border-outline-variant flex justify-between items-center px-margin-desktop max-w-[1440px]">
+<!-- Left: Search -->
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full h-10 pl-10 pr-3 rounded bg-surface-container-lowest border border-outline-variant focus:border-on-secondary-fixed focus:ring-1 focus:ring-on-secondary-fixed/20 text-on-surface font-body-md text-body-md outline-none transition-all" placeholder="Search pipeline..." type="text"/>
+</div>
+</div>
+<!-- Center: Links (As per JSON, though empty logic here for active state) -->
+<div class="hidden md:flex gap-6">
+<a class="text-on-surface-variant hover:text-on-secondary-fixed font-title-lg text-title-lg transition-all duration-200" href="#">Dashboard</a>
+<a class="text-on-surface-variant hover:text-on-secondary-fixed font-title-lg text-title-lg transition-all duration-200" href="#">Analytics</a>
+</div>
+<!-- Right: Actions & Profile -->
+<div class="flex items-center gap-4 flex-1 justify-end">
+<button class="text-primary dark:text-primary-fixed hover:bg-surface-container-low p-2 rounded-full transition-all duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-primary dark:text-primary-fixed hover:bg-surface-container-low p-2 rounded-full transition-all duration-200">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant cursor-pointer">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Professional corporate headshot of a Pakistani real estate agent in a modern office, wearing a sharp suit, warm natural lighting, high quality, professional portrait." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa187h3a6eZMvKeNb23yrzinum2zEk-nACtKgAcj8mMANhvs6WOhiBh5FphdgQPYQF-2I_3wNSn54kacG5kc9risqgcCFu0b5N-gr1cxAoiFUNGXCAwzo_6uOr0l7YDBAukYMVUhkAUwJSx3jkRY6HStuhajGQrMaZElUDNO1596qZlvkztMZuno9S3ysQfPebjC5--5gmrUp_0szqkz5HCIRmWsGZW09YrorQEV58xFE6rX4tKoh0mM3Mf16qGecBOdcaCv1_tWg"/>
+</div>
+</div>
+</header>
+<!-- Kanban Board Canvas -->
+<div class="flex-1 overflow-x-auto overflow-y-hidden kanban-scroll p-gutter max-w-container-max mx-auto w-full">
+<!-- Board Header -->
+<div class="flex justify-between items-end mb-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface m-0">Pipeline Overview</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Manage and track your active deals.</p>
+</div>
+<div class="flex gap-3">
+<button class="h-10 px-4 rounded border border-outline-variant bg-surface-container-lowest font-label-md text-label-md text-on-surface hover:bg-outline-variant transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                            Filter
+                        </button>
+</div>
+</div>
+<!-- Columns Container -->
+<div class="flex gap-gutter items-start h-full pb-8">
+<!-- Column 1: New Lead -->
+<div class="w-[320px] flex-shrink-0 flex flex-col bg-surface-container-low/50 rounded-lg p-2 border border-outline-variant/50 kanban-column">
+<div class="px-2 py-3 mb-2 flex justify-between items-center border-b border-outline-variant/50">
+<h3 class="font-title-lg text-title-lg text-on-surface flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#94a3b8]"></span>
+                                New Lead
+                            </h3>
+<div class="text-right">
+<span class="block font-label-md text-label-md text-on-surface">(12)</span>
+<span class="block font-label-md text-label-md text-on-surface-variant">₨ 15.5 Cr</span>
+</div>
+</div>
+<div class="flex flex-col gap-3 overflow-y-auto pr-1">
+<!-- Card 1 -->
+<div class="kanban-card bg-surface-container-lowest border border-outline-variant rounded p-4 hover:shadow-[0_4px_12px_rgba(15,23,42,0.08)] transition-shadow">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-body-md text-body-md font-medium text-on-surface">Ali Hassan</h4>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-label-md text-[10px] uppercase tracking-wider">Hot</span>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">call</span>
+                                        +92 300 1234567
+                                    </div>
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">payments</span>
+                                        ₨ 2.5 Crore
+                                    </div>
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                        DHA Phase 6, Lahore
+                                    </div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="kanban-card bg-surface-container-lowest border border-outline-variant rounded p-4 hover:shadow-[0_4px_12px_rgba(15,23,42,0.08)] transition-shadow">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-body-md text-body-md font-medium text-on-surface">Zainab Ahmed</h4>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">call</span>
+                                        +92 333 9876543
+                                    </div>
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">payments</span>
+                                        ₨ 1.2 Crore
+                                    </div>
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                        Bahria Town, Islamabad
+                                    </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 2: Contacted -->
+<div class="w-[320px] flex-shrink-0 flex flex-col bg-surface-container-low/50 rounded-lg p-2 border border-outline-variant/50 kanban-column">
+<div class="px-2 py-3 mb-2 flex justify-between items-center border-b border-outline-variant/50">
+<h3 class="font-title-lg text-title-lg text-on-surface flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#60a5fa]"></span>
+                                Contacted
+                            </h3>
+<div class="text-right">
+<span class="block font-label-md text-label-md text-on-surface">(8)</span>
+<span class="block font-label-md text-label-md text-on-surface-variant">₨ 8.2 Cr</span>
+</div>
+</div>
+<div class="flex flex-col gap-3 overflow-y-auto pr-1">
+<!-- Card 3 -->
+<div class="kanban-card bg-surface-container-lowest border border-outline-variant rounded p-4 hover:shadow-[0_4px_12px_rgba(15,23,42,0.08)] transition-shadow">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-body-md text-body-md font-medium text-on-surface">Fahad Mustafa</h4>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-label-md text-[10px] uppercase tracking-wider">Follow Up</span>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">call</span>
+                                        +92 321 5556667
+                                    </div>
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">payments</span>
+                                        ₨ 4.0 Crore
+                                    </div>
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                        Clifton, Karachi
+                                    </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 3: Site Visit -->
+<div class="w-[320px] flex-shrink-0 flex flex-col bg-surface-container-low/50 rounded-lg p-2 border border-outline-variant/50 kanban-column">
+<div class="px-2 py-3 mb-2 flex justify-between items-center border-b border-outline-variant/50">
+<h3 class="font-title-lg text-title-lg text-on-surface flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#facc15]"></span>
+                                Site Visit
+                            </h3>
+<div class="text-right">
+<span class="block font-label-md text-label-md text-on-surface">(5)</span>
+<span class="block font-label-md text-label-md text-on-surface-variant">₨ 6.0 Cr</span>
+</div>
+</div>
+<div class="flex flex-col gap-3 overflow-y-auto pr-1">
+<!-- Card 4 -->
+<div class="kanban-card bg-surface-container-lowest border border-outline-variant rounded p-4 hover:shadow-[0_4px_12px_rgba(15,23,42,0.08)] transition-shadow border-l-2 border-l-[#facc15]">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-body-md text-body-md font-medium text-on-surface">Kamran Akmal</h4>
+<span class="material-symbols-outlined text-[#facc15] text-[18px]">calendar_today</span>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">call</span>
+                                        +92 345 1122334
+                                    </div>
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">payments</span>
+                                        ₨ 3.5 Crore
+                                    </div>
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                        Gulberg, Lahore
+                                    </div>
+<div class="mt-2 pt-2 border-t border-outline-variant flex items-center gap-2 text-on-secondary-fixed font-label-md text-[11px]">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                        Today, 4:00 PM
+                                    </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 4: Negotiation -->
+<div class="w-[320px] flex-shrink-0 flex flex-col bg-surface-container-low/50 rounded-lg p-2 border border-outline-variant/50 kanban-column">
+<div class="px-2 py-3 mb-2 flex justify-between items-center border-b border-outline-variant/50">
+<h3 class="font-title-lg text-title-lg text-on-surface flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#fb923c]"></span>
+                                Negotiation
+                            </h3>
+<div class="text-right">
+<span class="block font-label-md text-label-md text-on-surface">(8)</span>
+<span class="block font-label-md text-label-md text-on-surface-variant">₨ 4.2 Cr</span>
+</div>
+</div>
+<div class="flex flex-col gap-3 overflow-y-auto pr-1">
+<!-- Card 5 -->
+<div class="kanban-card bg-surface-container-lowest border border-outline-variant rounded p-4 hover:shadow-[0_4px_12px_rgba(15,23,42,0.08)] transition-shadow">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-body-md text-body-md font-medium text-on-surface">Tariq Jamil</h4>
+<span class="px-2 py-0.5 rounded bg-tertiary-container text-on-tertiary-container font-label-md text-[10px] uppercase tracking-wider">High Prob</span>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">call</span>
+                                        +92 311 4447778
+                                    </div>
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">payments</span>
+                                        ₨ 4.2 Crore
+                                    </div>
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                        F-8 Markaz, Islamabad
+                                    </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 5: Closed -->
+<div class="w-[320px] flex-shrink-0 flex flex-col bg-surface-container-low/50 rounded-lg p-2 border border-outline-variant/50 kanban-column">
+<div class="px-2 py-3 mb-2 flex justify-between items-center border-b border-outline-variant/50">
+<h3 class="font-title-lg text-title-lg text-on-surface flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#4ade80]"></span>
+                                Closed
+                            </h3>
+<div class="text-right">
+<span class="block font-label-md text-label-md text-on-surface">(24)</span>
+<span class="block font-label-md text-label-md text-on-surface-variant">₨ 35.8 Cr</span>
+</div>
+</div>
+<div class="flex flex-col gap-3 overflow-y-auto pr-1 opacity-75">
+<!-- Card 6 -->
+<div class="kanban-card bg-surface-container-lowest border border-[#4ade80]/30 rounded p-4">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-body-md text-body-md font-medium text-on-surface line-through">Osman Khalid</h4>
+<span class="material-symbols-outlined text-[#4ade80] text-[18px]">verified</span>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">payments</span>
+                                        ₨ 8.5 Crore
+                                    </div>
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                        DHA Phase 8, Karachi
+                                    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

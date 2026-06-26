@@ -10,6 +10,7 @@ import backend.models.property  # noqa: F401
 import backend.models.client  # noqa: F401
 import backend.models.interaction_log  # noqa: F401
 import backend.models.site_visit_slot  # noqa: F401
+import backend.models.call_log  # noqa: F401
 
 from backend.routers import auth
 from backend.routers import properties, clients, dashboard
@@ -52,6 +53,16 @@ app.include_router(whatsapp_router)
 app.include_router(deal_closer_router)
 app.include_router(email_router)
 app.include_router(slots_router)
+
+# pywa_async registers GET+POST /whatsapp/webhook on the app directly
+# Must happen after app is created and routers are registered
+from backend.integrations.whatsapp import init_whatsapp
+from backend.integrations.whatsapp_handlers import register_handlers
+from backend.integrations.call_handlers import register_call_handlers
+
+_wa = init_whatsapp(app)
+register_handlers(_wa)
+register_call_handlers(_wa)
 
 
 @app.get("/health")

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PropFlow AI Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-secondary-fixed-variant": "#63356a",
+                "on-surface": "#1c1c14",
+                "surface-container": "#f1eee1",
+                "on-primary-container": "#6f7166",
+                "secondary-fixed-dim": "#eeb3f2",
+                "primary-container": "#f6f7e9",
+                "surface": "#fdf9ed",
+                "primary-fixed-dim": "#c6c8ba",
+                "tertiary-fixed": "#ffdea5",
+                "background": "#fdf9ed",
+                "tertiary-fixed-dim": "#e2c289",
+                "on-secondary": "#ffffff",
+                "secondary-container": "#f9befd",
+                "surface-container-lowest": "#ffffff",
+                "error-container": "#ffdad6",
+                "inverse-surface": "#313128",
+                "on-error": "#ffffff",
+                "on-primary": "#ffffff",
+                "surface-tint": "#5d5f55",
+                "primary": "#5d5f55",
+                "on-tertiary-fixed-variant": "#594316",
+                "error": "#ba1a1a",
+                "on-primary-fixed": "#1a1d14",
+                "secondary-fixed": "#ffd6ff",
+                "outline-variant": "#c7c7be",
+                "on-tertiary-container": "#866c3b",
+                "on-error-container": "#93000a",
+                "on-background": "#1c1c14",
+                "on-surface-variant": "#464741",
+                "tertiary": "#735b2b",
+                "surface-container-low": "#f7f4e7",
+                "surface-container-highest": "#e6e2d6",
+                "on-tertiary": "#ffffff",
+                "primary-fixed": "#e2e4d6",
+                "outline": "#777870",
+                "surface-dim": "#dddace",
+                "on-secondary-container": "#78487f",
+                "on-secondary-fixed": "#32053b",
+                "surface-variant": "#e6e2d6",
+                "on-tertiary-fixed": "#261900",
+                "on-primary-fixed-variant": "#45483e",
+                "secondary": "#7d4c84",
+                "inverse-primary": "#c6c8ba",
+                "surface-container-high": "#ece8dc",
+                "tertiary-container": "#fff4e7",
+                "inverse-on-surface": "#f4f1e4",
+                "surface-bright": "#fdf9ed"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "unit": "8px",
+                "margin-desktop": "64px",
+                "container-max-width": "1200px",
+                "margin-mobile": "20px",
+                "gutter": "24px"
+        },
+        "fontFamily": {
+                "headline-md": [
+                        "Playfair Display"
+                ],
+                "display-lg": [
+                        "Playfair Display"
+                ],
+                "body-lg": [
+                        "DM Sans"
+                ],
+                "label-md": [
+                        "DM Sans"
+                ],
+                "headline-lg-mobile": [
+                        "Playfair Display"
+                ],
+                "headline-lg": [
+                        "Playfair Display"
+                ],
+                "body-md": [
+                        "DM Sans"
+                ],
+                "label-sm": [
+                        "DM Sans"
+                ]
+        },
+        "fontSize": {
+                "headline-md": [
+                        "28px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "56px",
+                        {
+                                "lineHeight": "1.1",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "1.4",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "32px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-lg": [
+                        "40px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "700"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        body {
+            background-color: #F6F7E9; /* Updated Primary Surface */
+        }
+        .bento-card {
+            background-color: #FFFFFF;
+            border: 1px solid #c7c7be;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease-in-out;
+        }
+        .bento-card:hover {
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+        
+        .bg-maroon-dark { background-color: #33063C; }
+        .text-maroon-dark { color: #33063C; }
+        .border-maroon-dark { border-color: #33063C; }
+        
+        .bg-maroon-light { background-color: #63356a; }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface flex min-h-screen">
+<!-- SideNavBar (from JSON) -->
+<nav class="hidden md:flex w-[260px] h-full fixed left-0 top-0 bg-maroon-dark text-on-primary border-r border-outline-variant flex-col font-body-md z-50">
+<div class="p-gutter border-b border-maroon-light/30">
+<h1 class="font-headline-md text-headline-md text-white mb-1">PropFlow AI</h1>
+<p class="text-tertiary-fixed text-sm opacity-80">Elite Real Estate CRM</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4 flex flex-col gap-1 px-3">
+<a class="flex items-center gap-3 px-4 py-3 rounded bg-maroon-light text-white border-l-4 border-white font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-secondary-fixed hover:bg-maroon-light/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">real_estate_agent</span>
+                Properties
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-secondary-fixed hover:bg-maroon-light/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">groups</span>
+                Clients
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-secondary-fixed hover:bg-maroon-light/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">account_tree</span>
+                Pipeline
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-secondary-fixed hover:bg-maroon-light/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+                AI Chat
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-secondary-fixed hover:bg-maroon-light/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+                Site Visits
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-secondary-fixed hover:bg-maroon-light/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+                WhatsApp
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-secondary-fixed hover:bg-maroon-light/50 transition-colors mt-auto" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+                Settings
+            </a>
+</div>
+<div class="p-gutter border-t border-maroon-light/30">
+<button class="w-full bg-surface-container-lowest text-maroon-dark font-medium py-2 px-4 rounded hover:bg-surface-container transition-colors active:scale-95 duration-150 flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                Add New Listing
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<div class="flex-1 md:ml-[260px] flex flex-col min-h-screen">
+<!-- TopAppBar (Hybrid approach based on JSON structure + User Prompt details) -->
+<header class="h-16 w-full sticky top-0 z-40 bg-surface/90 backdrop-blur-md border-b border-outline-variant flex justify-between items-center px-margin-desktop md:px-margin-desktop px-margin-mobile">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="font-headline-md text-headline-md font-bold text-maroon-dark hidden sm:block">Dashboard</h2>
+</div>
+<div class="flex items-center gap-6">
+<!-- Search (simplified from JSON 'search_bar': 'on_left') -->
+<div class="hidden lg:flex items-center bg-white border border-outline-variant rounded-full px-4 py-1.5 focus-within:border-maroon-dark focus-within:ring-1 focus-within:ring-maroon-dark/20 transition-all w-64">
+<span class="material-symbols-outlined text-outline text-[18px] mr-2">search</span>
+<input class="bg-transparent border-none outline-none text-sm w-full placeholder:text-outline text-on-surface p-0 focus:ring-0" placeholder="Search CRM..." type="text"/>
+</div>
+<!-- Trailing Icons -->
+<div class="flex items-center gap-2">
+<button class="p-2 text-outline hover:bg-surface-container-low rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-outline hover:bg-surface-container-low rounded-full transition-all hidden sm:block">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+<!-- User Profile -->
+<div class="flex items-center gap-3 pl-4 border-l border-outline-variant cursor-pointer hover:bg-surface-container-low p-1.5 rounded transition-colors">
+<div class="text-right hidden sm:block">
+<p class="font-body-lg text-[14px] font-semibold text-on-surface">Ahmed Khan</p>
+<p class="font-label-md text-label-md text-outline">Owner</p>
+</div>
+<div class="w-9 h-9 rounded-full bg-maroon-light flex items-center justify-center text-white font-bold overflow-hidden border border-outline-variant">
+<img alt="Ahmed Khan" class="w-full h-full object-cover" data-alt="Professional headshot portrait of a South Asian businessman in a tailored navy suit with a subtle cream pocket square, standing in a brightly lit modern office with glass walls, warm natural light, soft bokeh background, high-end corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCRT9GtVPR7hmLTbAmWzqUXOE4pSkoa745fFYyk9Xq4a0_Gx8qH0GaQsVjbZ9fcgQTR-4QJSLY37kgW2YUZ8NbL-nCanLpL04Hu-ZvERcN7VdrqEnssedI0UkrEmOwrH3ziarGm2aCgSnlm8T1JbcWLh2oCrvde7VV-dvNSUC5BeQPEDlITxt7plxTEYBAr0gpgjIIfUz6kmQFAR7PekCjC_5E8Jy_vu7fsCxzu-vla_aokx4bOmly9mIJbH37oq3b1gXg9FDZZLE"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Dashboard Content -->
+<main class="flex-1 p-margin-mobile md:p-gutter lg:p-margin-desktop max-w-[1440px] mx-auto w-full">
+<!-- Quick Actions Banner -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-gutter gap-4">
+<div>
+<h3 class="font-headline-md text-headline-md sm:hidden mb-1">Dashboard</h3>
+<p class="font-body-md text-on-surface-variant">Welcome back. Here's your portfolio overview.</p>
+</div>
+<div class="flex gap-3 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none bg-white border border-maroon-dark text-maroon-dark px-4 py-2 rounded-lg font-medium hover:bg-maroon-dark/5 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+                        Add Client
+                    </button>
+<button class="flex-1 sm:flex-none bg-maroon-dark text-white px-4 py-2 rounded-lg font-medium hover:bg-maroon-dark/90 transition-colors flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add_home</span>
+                        Add Property
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-gutter">
+<!-- Stat Card 1 -->
+<div class="bento-card p-5 flex flex-col justify-between relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4 relative z-10">
+<p class="font-label-md text-label-md text-outline uppercase tracking-wider">Total Properties</p>
+<div class="p-2 bg-primary-container rounded text-maroon-dark">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">real_estate_agent</span>
+</div>
+</div>
+<div class="relative z-10">
+<h4 class="font-display-lg text-[32px] font-bold text-on-surface">124</h4>
+<p class="font-body-md text-sm text-secondary mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+                            +12 this month
+                        </p>
+</div>
+<!-- Decorative background element -->
+<div class="absolute -bottom-4 -right-4 w-24 h-24 bg-maroon-light/5 rounded-full blur-2xl group-hover:bg-maroon-light/10 transition-all duration-500"></div>
+</div>
+<!-- Stat Card 2 -->
+<div class="bento-card p-5 flex flex-col justify-between relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4 relative z-10">
+<p class="font-label-md text-label-md text-outline uppercase tracking-wider">Active Clients</p>
+<div class="p-2 bg-primary-container rounded text-maroon-dark">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+</div>
+</div>
+<div class="relative z-10">
+<h4 class="font-display-lg text-[32px] font-bold text-on-surface">48</h4>
+<p class="font-body-md text-sm text-secondary mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+                            +5 this week
+                        </p>
+</div>
+<div class="absolute -bottom-4 -right-4 w-24 h-24 bg-maroon-light/5 rounded-full blur-2xl group-hover:bg-maroon-light/10 transition-all duration-500"></div>
+</div>
+<!-- Stat Card 3 -->
+<div class="bento-card p-5 flex flex-col justify-between relative overflow-hidden group lg:col-span-2 bg-maroon-dark text-white border-none shadow-md">
+<!-- Subtle abstract pattern over dark background -->
+<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 16px 16px;"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<p class="font-label-md text-label-md text-secondary-fixed uppercase tracking-wider opacity-80">Pipeline Value</p>
+<div class="p-2 bg-white/10 rounded backdrop-blur-sm text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">monetization_on</span>
+</div>
+</div>
+<div class="relative z-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+<div>
+<h4 class="font-display-lg text-[40px] font-bold text-white tracking-tight">₨ 12.4 Cr</h4>
+<p class="font-body-md text-sm text-secondary-fixed mt-1 flex items-center gap-1">
+                                Across 22 active deals
+                            </p>
+</div>
+<!-- Mini visual representation of pipeline -->
+<div class="flex gap-1 items-end h-12 pb-1">
+<div class="w-3 bg-white/30 rounded-t h-[30%]"></div>
+<div class="w-3 bg-white/40 rounded-t h-[50%]"></div>
+<div class="w-3 bg-white/50 rounded-t h-[40%]"></div>
+<div class="w-3 bg-white/70 rounded-t h-[80%]"></div>
+<div class="w-3 bg-white rounded-t h-[100%] shadow-[0_0_8px_rgba(255,255,255,0.5)]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Lower Section: Chart & Activity -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Pipeline Stage Chart -->
+<div class="bento-card p-6 lg:col-span-2 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-[18px] text-on-surface">Pipeline Distribution</h3>
+<button class="text-outline hover:text-maroon-dark transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex-1 flex flex-col justify-center py-4">
+<!-- Custom CSS Bar Chart for aesthetic appeal -->
+<div class="space-y-4">
+<!-- Stage 1 -->
+<div>
+<div class="flex justify-between font-label-md text-sm mb-2">
+<span class="text-on-surface font-medium">New Lead</span>
+<span class="text-outline">45 Leads</span>
+</div>
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-gray-500 rounded-full w-[80%] relative"></div>
+</div>
+</div>
+<!-- Stage 2 -->
+<div>
+<div class="flex justify-between font-label-md text-sm mb-2">
+<span class="text-on-surface font-medium">Contacted</span>
+<span class="text-outline">28 Leads</span>
+</div>
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-blue-500 rounded-full w-[60%] relative"></div>
+</div>
+</div>
+<!-- Stage 3 -->
+<div>
+<div class="flex justify-between font-label-md text-sm mb-2">
+<span class="text-on-surface font-medium">Site Visit</span>
+<span class="text-outline">20 Leads</span>
+</div>
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-yellow-400 rounded-full w-[45%] relative"></div>
+</div>
+</div>
+<!-- Stage 4 -->
+<div>
+<div class="flex justify-between font-label-md text-sm mb-2">
+<span class="text-on-surface font-medium">Negotiation</span>
+<span class="text-outline">15 Leads</span>
+</div>
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-orange-500 rounded-full w-[35%] relative"></div>
+</div>
+</div>
+<!-- Stage 5 -->
+<div>
+<div class="flex justify-between font-label-md text-sm mb-2">
+<span class="text-on-surface font-medium">Closed</span>
+<span class="text-outline">12 Leads</span>
+</div>
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-green-500 rounded-full w-[25%] relative shadow-[0_0_8px_rgba(34,197,94,0.4)]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant flex justify-between items-center text-sm">
+<span class="text-outline">Deals Closed: <strong class="text-on-surface">12</strong></span>
+<a class="text-maroon-dark font-medium hover:underline flex items-center gap-1" href="#">
+                            View Pipeline Board <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Recent Activity Feed -->
+<div class="bento-card p-0 flex flex-col h-[400px] lg:h-auto">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center bg-white sticky top-0 rounded-t-lg z-10">
+<h3 class="font-headline-md text-[18px] text-on-surface">Recent Activity</h3>
+<span class="bg-primary-container text-maroon-dark text-xs px-2 py-1 rounded font-medium">Live</span>
+</div>
+<div class="flex-1 overflow-y-auto p-2">
+<!-- Activity List -->
+<ul class="space-y-1">
+<!-- Item 1 -->
+<li class="p-4 hover:bg-surface-container-low rounded-lg transition-colors group cursor-pointer border-l-2 border-transparent hover:border-maroon-dark">
+<div class="flex gap-4">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]">forum</span>
+</div>
+<div>
+<p class="font-body-md text-sm text-on-surface">
+<span class="font-semibold text-maroon-dark">Ahmed Khan</span> sent WhatsApp to <span class="font-medium">Imran Malik</span>
+</p>
+<p class="font-label-md text-xs text-outline mt-1">10 minutes ago • regarding DHA Phase 8 Plot</p>
+</div>
+</div>
+</li>
+<!-- Item 2 -->
+<li class="p-4 hover:bg-surface-container-low rounded-lg transition-colors group cursor-pointer border-l-2 border-transparent hover:border-maroon-dark">
+<div class="flex gap-4">
+<div class="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span>
+</div>
+<div>
+<p class="font-body-md text-sm text-on-surface">
+                                            Site visit scheduled with <span class="font-medium">Zainab Ali</span>
+</p>
+<p class="font-label-md text-xs text-outline mt-1">2 hours ago • Bahria Town Villa</p>
+</div>
+</div>
+</li>
+<!-- Item 3 -->
+<li class="p-4 hover:bg-surface-container-low rounded-lg transition-colors group cursor-pointer border-l-2 border-transparent hover:border-maroon-dark">
+<div class="flex gap-4">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]">smart_toy</span>
+</div>
+<div>
+<p class="font-body-md text-sm text-on-surface">
+                                            AI qualified new lead: <span class="font-medium">Usman Tariq</span>
+</p>
+<p class="font-label-md text-xs text-outline mt-1">4 hours ago • Budget: 5-7 Cr</p>
+</div>
+</div>
+</li>
+<!-- Item 4 -->
+<li class="p-4 hover:bg-surface-container-low rounded-lg transition-colors group cursor-pointer border-l-2 border-transparent hover:border-maroon-dark">
+<div class="flex gap-4">
+<div class="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]">edit_document</span>
+</div>
+<div>
+<p class="font-body-md text-sm text-on-surface">
+                                            Contract drafted for <span class="font-medium">Gulberg Commercial</span>
+</p>
+<p class="font-label-md text-xs text-outline mt-1">Yesterday • Pending signatures</p>
+</div>
+</div>
+</li>
+<!-- Item 5 -->
+<li class="p-4 hover:bg-surface-container-low rounded-lg transition-colors group cursor-pointer border-l-2 border-transparent hover:border-maroon-dark">
+<div class="flex gap-4">
+<div class="w-8 h-8 rounded-full bg-primary-container text-maroon-dark flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]">add_home</span>
+</div>
+<div>
+<p class="font-body-md text-sm text-on-surface">
+                                            New property listing published
+                                        </p>
+<p class="font-label-md text-xs text-outline mt-1">Yesterday • 10 Kanal Farmhouse, Bedian Rd</p>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="p-4 border-t border-outline-variant bg-surface-bright rounded-b-lg text-center">
+<a class="text-sm font-medium text-maroon-dark hover:text-maroon-light transition-colors" href="#">View All Activity</a>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

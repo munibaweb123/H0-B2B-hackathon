@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RealtyFlow PK - Add Property</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#63356a",
+                        "on-surface": "#1c1c14",
+                        "surface-container": "#f1eee1",
+                        "on-primary-container": "#6f7166",
+                        "secondary-fixed-dim": "#eeb3f2",
+                        "primary-container": "#f6f7e9",
+                        "surface": "#fdf9ed",
+                        "primary-fixed-dim": "#c6c8ba",
+                        "tertiary-fixed": "#ffdea5",
+                        "background": "#fdf9ed",
+                        "tertiary-fixed-dim": "#e2c289",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#f9befd",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#313128",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#5d5f55",
+                        "primary": "#5d5f55",
+                        "on-tertiary-fixed-variant": "#594316",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#1a1d14",
+                        "secondary-fixed": "#ffd6ff",
+                        "outline-variant": "#c7c7be",
+                        "on-tertiary-container": "#866c3b",
+                        "on-error-container": "#93000a",
+                        "on-background": "#1c1c14",
+                        "on-surface-variant": "#464741",
+                        "tertiary": "#735b2b",
+                        "surface-container-low": "#f7f4e7",
+                        "surface-container-highest": "#e6e2d6",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#e2e4d6",
+                        "outline": "#777870",
+                        "surface-dim": "#dddace",
+                        "on-secondary-container": "#78487f",
+                        "on-secondary-fixed": "#32053b",
+                        "surface-variant": "#e6e2d6",
+                        "on-tertiary-fixed": "#261900",
+                        "on-primary-fixed-variant": "#45483e",
+                        "secondary": "#7d4c84",
+                        "inverse-primary": "#c6c8ba",
+                        "surface-container-high": "#ece8dc",
+                        "tertiary-container": "#fff4e7",
+                        "inverse-on-surface": "#f4f1e4",
+                        "surface-bright": "#fdf9ed"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "container-max-width": "1200px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "body-lg": ["DM Sans"],
+                        "label-md": ["DM Sans"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "headline-lg": ["Playfair Display"],
+                        "body-md": ["DM Sans"],
+                        "label-sm": ["DM Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["28px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "display-lg": ["56px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex antialiased">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col bg-secondary dark:bg-on-secondary-fixed-variant fixed left-0 top-0 h-full w-64 shadow-xl shadow-secondary/10 z-50">
+<div class="flex flex-col h-full py-8 px-4">
+<div class="mb-10 px-4">
+<h1 class="font-headline-md text-headline-md text-on-secondary">RealtyFlow PK</h1>
+<p class="font-body-md text-label-md text-on-secondary/70 mt-1">Premium CRM</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 text-on-secondary/80 hover:text-on-secondary px-4 py-3 transition-colors hover:bg-on-secondary-fixed-variant/50 transition-all duration-200 active:scale-95 font-body-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-lg px-4 py-3 font-bold font-body-md text-label-md transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="home_work">home_work</span>
+                    Properties
+                </a>
+<a class="flex items-center gap-3 text-on-secondary/80 hover:text-on-secondary px-4 py-3 transition-colors hover:bg-on-secondary-fixed-variant/50 transition-all duration-200 active:scale-95 font-body-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+                    Clients
+                </a>
+<a class="flex items-center gap-3 text-on-secondary/80 hover:text-on-secondary px-4 py-3 transition-colors hover:bg-on-secondary-fixed-variant/50 transition-all duration-200 active:scale-95 font-body-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+                    Pipeline
+                </a>
+<a class="flex items-center gap-3 text-on-secondary/80 hover:text-on-secondary px-4 py-3 transition-colors hover:bg-on-secondary-fixed-variant/50 transition-all duration-200 active:scale-95 font-body-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+                    AI Chat
+                </a>
+<a class="flex items-center gap-3 text-on-secondary/80 hover:text-on-secondary px-4 py-3 transition-colors hover:bg-on-secondary-fixed-variant/50 transition-all duration-200 active:scale-95 font-body-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+                    Site Visits
+                </a>
+<a class="flex items-center gap-3 text-on-secondary/80 hover:text-on-secondary px-4 py-3 transition-colors hover:bg-on-secondary-fixed-variant/50 transition-all duration-200 active:scale-95 font-body-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+                    WhatsApp
+                </a>
+<a class="flex items-center gap-3 text-on-secondary/80 hover:text-on-secondary px-4 py-3 transition-colors hover:bg-on-secondary-fixed-variant/50 transition-all duration-200 active:scale-95 font-body-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    Settings
+                </a>
+</nav>
+<div class="mt-auto pt-8 border-t border-on-secondary/10 px-4 flex items-center gap-3">
+<img alt="Agency Logo" class="w-10 h-10 rounded-full object-cover bg-on-secondary/20" data-alt="A sophisticated, high-end corporate agency logo mark featuring minimalist geometric shapes in gold and deep plum colors, isolated on a clean white background, creating an impression of quiet luxury and professional real estate services." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADU07XaDuBaOIKJoeZzQeEGwd2eQ-O2u79S3FkbjXMPtbaGRHq03hzQnzzeYq09zclW1wG1swtM3xNxaCrDzSeN1oMaB6OWk5fC2pe0GVgltsMMcZgMy8GENBeErnJ3pttCazjrbvVIjxZq9BIdPNYvsooRxPio_0Xx4IeCAPhFCpEo4RvVabJLOXcJHI5gVZnJETAZGWjuBonKIxoeeDMefEPFpqpTLd0cMg5HSUw0uC5NXZj6hyGM3NyGrOlSJmirdIn5asrTTE"/>
+<div class="flex-1 min-w-0">
+<p class="font-body-md text-label-md text-on-secondary truncate">Agency Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="hidden md:flex justify-between items-center px-8 z-40 bg-surface/80 backdrop-blur-md fixed top-0 right-0 w-[calc(100%-16rem)] h-16 border-b border-outline-variant/10">
+<div class="flex-1 flex items-center gap-4">
+<div class="relative w-64 focus-within:ring-2 focus-within:ring-secondary/20 rounded-lg">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container rounded-lg border-none focus:ring-0 text-on-surface font-body-md text-body-md placeholder:text-on-surface-variant/50" placeholder="Search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-secondary transition-colors rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-secondary transition-colors rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden ml-2 border border-outline-variant/20">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="A highly professional headshot of a real estate agent in a modern, well-lit minimalist office space. The lighting is soft and flattering, highlighting a warm, authoritative expression. The color palette is composed of creamy whites and subtle plum undertones, reflecting a premium editorial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBO7UKI9N9kU1Vm0ybsiS-vEoFXc91D3r4yuFxkQM2gV-h51cGAn2lpu1nci9im8e-OKZGzj2hNigILH9uiN6LOwk_UwuDhgslhw6IBCyL1G1KJwqGTqH_P8m-GfnZdNy77pRzgRaHraGX6vAvzrO5XD6YgWW_i2hRdclGAuAYWGYFPPsE9hNjLarI9AFR5jfhEI5nK9HUV9oEF0r1Kfw-mHN_0Fi4D7146FA619xhORdpMTXFFi1Wy_d1dRBiD8uvXpPhBrC4rYBE"/>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 pt-16 min-h-screen">
+<div class="max-w-[720px] mx-auto px-margin-mobile md:px-0 py-12 md:py-16">
+<div class="mb-10 text-center md:text-left">
+<button class="mb-6 flex items-center gap-2 text-on-surface-variant hover:text-secondary transition-colors font-body-md text-label-md">
+<span class="material-symbols-outlined">arrow_back</span>
+                    Back to Properties
+                </button>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Add New Property</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Enter the details for the new listing to add it to your portfolio.</p>
+</div>
+<form class="space-y-8 md:space-y-12">
+<!-- Section 1: Basic Info -->
+<section class="bg-surface-container-lowest p-6 md:p-8 rounded-xl border border-outline-variant/15">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6 border-b border-outline-variant/10 pb-4">Basic Information</h3>
+<div class="space-y-6">
+<div>
+<label class="block font-body-md text-label-md text-on-surface mb-2">Property Title</label>
+<input class="w-full bg-surface-container border-0 border-b border-secondary/20 focus:border-secondary focus:ring-0 px-4 py-3 font-body-md text-body-md text-on-surface transition-colors" placeholder="e.g. Modern Villa in Bahria Town" type="text" value="3-Bed House DHA Phase 5"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block font-body-md text-label-md text-on-surface mb-2">Property Type</label>
+<select class="w-full bg-surface-container border-0 border-b border-secondary/20 focus:border-secondary focus:ring-0 px-4 py-3 font-body-md text-body-md text-on-surface transition-colors">
+<option selected="" value="house">House</option>
+<option value="apartment">Apartment</option>
+<option value="plot">Plot</option>
+<option value="commercial">Commercial</option>
+</select>
+</div>
+<div>
+<label class="block font-body-md text-label-md text-on-surface mb-2">Status</label>
+<select class="w-full bg-surface-container border-0 border-b border-secondary/20 focus:border-secondary focus:ring-0 px-4 py-3 font-body-md text-body-md text-on-surface transition-colors">
+<option selected="" value="available">Available</option>
+<option value="sold">Sold</option>
+<option value="rented">Rented</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block font-body-md text-label-md text-on-surface mb-2">Description</label>
+<textarea class="w-full bg-surface-container border-0 border-b border-secondary/20 focus:border-secondary focus:ring-0 px-4 py-3 font-body-md text-body-md text-on-surface transition-colors resize-none" placeholder="Provide a detailed description of the property..." rows="4"></textarea>
+</div>
+</div>
+</section>
+<!-- Section 2: Pricing & Size -->
+<section class="bg-surface-container-lowest p-6 md:p-8 rounded-xl border border-outline-variant/15">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6 border-b border-outline-variant/10 pb-4">Pricing &amp; Configuration</h3>
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block font-body-md text-label-md text-on-surface mb-2">Price (PKR)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-body-md">Rs.</span>
+<input class="w-full bg-surface-container border-0 border-b border-secondary/20 focus:border-secondary focus:ring-0 pl-12 pr-4 py-3 font-body-md text-body-md text-on-surface transition-colors" type="text" value="8,500,000"/>
+</div>
+</div>
+<div>
+<label class="block font-body-md text-label-md text-on-surface mb-2">Area / Size</label>
+<div class="flex gap-2">
+<input class="w-2/3 bg-surface-container border-0 border-b border-secondary/20 focus:border-secondary focus:ring-0 px-4 py-3 font-body-md text-body-md text-on-surface transition-colors" placeholder="Value" type="number"/>
+<select class="w-1/3 bg-surface-container border-0 border-b border-secondary/20 focus:border-secondary focus:ring-0 px-2 py-3 font-body-md text-body-md text-on-surface transition-colors">
+<option value="marla">Marla</option>
+<option value="kanal">Kanal</option>
+<option value="sqft">Sq Ft</option>
+</select>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block font-body-md text-label-md text-on-surface mb-2">Bedrooms</label>
+<div class="flex items-center gap-4 bg-surface-container p-2 rounded border-b border-secondary/20">
+<button class="w-8 h-8 flex items-center justify-center rounded bg-surface hover:bg-surface-variant text-on-surface transition-colors" type="button">-</button>
+<input class="w-full bg-transparent border-0 text-center font-body-md text-body-md text-on-surface focus:ring-0 p-0" min="0" type="number" value="3"/>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-surface hover:bg-surface-variant text-on-surface transition-colors" type="button">+</button>
+</div>
+</div>
+<div>
+<label class="block font-body-md text-label-md text-on-surface mb-2">Bathrooms</label>
+<div class="flex items-center gap-4 bg-surface-container p-2 rounded border-b border-secondary/20">
+<button class="w-8 h-8 flex items-center justify-center rounded bg-surface hover:bg-surface-variant text-on-surface transition-colors" type="button">-</button>
+<input class="w-full bg-transparent border-0 text-center font-body-md text-body-md text-on-surface focus:ring-0 p-0" min="0" type="number" value="2"/>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-surface hover:bg-surface-variant text-on-surface transition-colors" type="button">+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Location -->
+<section class="bg-surface-container-lowest p-6 md:p-8 rounded-xl border border-outline-variant/15">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6 border-b border-outline-variant/10 pb-4">Location Details</h3>
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block font-body-md text-label-md text-on-surface mb-2">City</label>
+<input class="w-full bg-surface-container border-0 border-b border-secondary/20 focus:border-secondary focus:ring-0 px-4 py-3 font-body-md text-body-md text-on-surface transition-colors" type="text" value="Lahore"/>
+</div>
+<div>
+<label class="block font-body-md text-label-md text-on-surface mb-2">Locality / Area</label>
+<input class="w-full bg-surface-container border-0 border-b border-secondary/20 focus:border-secondary focus:ring-0 px-4 py-3 font-body-md text-body-md text-on-surface transition-colors" type="text" value="DHA Phase 5"/>
+</div>
+</div>
+<div>
+<label class="block font-body-md text-label-md text-on-surface mb-2">Detailed Address</label>
+<input class="w-full bg-surface-container border-0 border-b border-secondary/20 focus:border-secondary focus:ring-0 px-4 py-3 font-body-md text-body-md text-on-surface transition-colors" placeholder="Street number, House number, etc." type="text"/>
+</div>
+</div>
+</section>
+<!-- Section 4: Photos -->
+<section class="bg-surface-container-lowest p-6 md:p-8 rounded-xl border border-outline-variant/15">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6 border-b border-outline-variant/10 pb-4">Media</h3>
+<div class="space-y-4">
+<label class="block font-body-md text-label-md text-on-surface mb-2">Photo URLs (One per line)</label>
+<textarea class="w-full bg-surface-container border-0 border-b border-secondary/20 focus:border-secondary focus:ring-0 px-4 py-3 font-body-md text-body-md text-on-surface transition-colors resize-none font-mono text-sm" placeholder="https://example.com/image1.jpg
+https://example.com/image2.jpg" rows="5"></textarea>
+<p class="font-body-md text-label-sm text-on-surface-variant">Provide direct links to property images to attach them to this listing.</p>
+</div>
+</section>
+<!-- Actions -->
+<div class="flex flex-col-reverse md:flex-row items-center justify-end gap-4 pt-6 mt-8 border-t border-outline-variant/20">
+<button class="w-full md:w-auto px-8 py-3 rounded border border-secondary text-secondary font-body-md text-label-md font-bold hover:bg-secondary/5 transition-colors text-center" type="button">
+                        Cancel
+                    </button>
+<button class="w-full md:w-auto px-8 py-3 rounded bg-on-secondary-fixed text-on-secondary font-body-md text-label-md font-bold hover:bg-on-secondary-fixed/90 transition-colors shadow-lg shadow-on-secondary-fixed/20 text-center flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                        Save Property
+                    </button>
+</div>
+</form>
+</div>
+</main>
+<!-- BottomNavBar for Mobile -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container border-t border-outline-variant/10 flex justify-around items-center h-16 z-50 px-2 pb-safe">
+<a class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-md text-[10px] mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-secondary font-bold" href="#">
+<span class="material-symbols-outlined" data-icon="home_work" data-weight="fill">home_work</span>
+<span class="font-body-md text-[10px] mt-1">Properties</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span class="font-body-md text-[10px] mt-1">Add</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-body-md text-[10px] mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

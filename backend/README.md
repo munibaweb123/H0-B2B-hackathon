@@ -4,7 +4,28 @@ FastAPI backend for PropFlow AI. Python 3.11, SQLModel, Aurora DSQL, OpenAI Agen
 
 ---
 
-## Setup
+## Running with Docker (recommended)
+
+From the project root (`H0-B2B-hackathon/`):
+
+```bash
+# Build and start
+docker compose up --build
+
+# Subsequent starts (no rebuild)
+docker compose up
+
+# Stop
+docker compose down
+```
+
+API docs: `http://localhost:8000/docs`
+
+> First startup takes ~22s — Aurora DSQL warms the IAM token before accepting traffic.
+
+---
+
+## Running locally (without Docker)
 
 ```bash
 # Install dependencies
@@ -13,8 +34,6 @@ uv sync
 # Start the server
 uv run uvicorn backend.main:app --reload --port 8000
 ```
-
-> First startup takes ~22s — Aurora DSQL warms the IAM token before accepting traffic.
 
 API docs: `http://localhost:8000/docs`
 
