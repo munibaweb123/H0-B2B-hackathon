@@ -1,204 +1,265 @@
-# PropFlow AI — Your Smart Real Estate Office, All in One Place
+# PropFlow AI — Project Requirements Document
 
-Forget the WhatsApp groups, the Excel sheets, and the paper diaries. PropFlow AI brings everything your agency needs into a single, simple platform — so you can spend less time managing chaos and more time closing deals.
-
-> **The big idea:** 50,000 Pakistani real estate agents each working 8 hours a day. PropFlow gives every one of them a second agent that works 24 hours — one that never sleeps, never forgets, and never stops following up.
-
----
-
-## 1. Your Agency, Your Workspace
-
-When you sign up, PropFlow creates a private workspace just for your agency. You can invite your agents and team members, and everyone works from the same place — no more confusion about who has which client or which property is already sold.
-
-Think of it as your agency's own digital office.
+**Prepared for:** Development Team
+**Project Name:** PropFlow AI
+**Type:** Multi-Tenant B2B SaaS Platform
 
 ---
 
-## 2. Property Listings — All Your Properties in One Place
+## Executive Summary
 
-Add your properties once and find them instantly. You can store everything about a property — location, price, size, number of rooms, photos, and any other details. Need to search for a 3-bedroom house in Bahria Town under 1.5 crore? Done in seconds.
+PropFlow AI is an intelligent real estate agency management platform built specifically for the Pakistani market. It gives real estate agencies a single place to manage their properties, clients, and deals — while an AI agent works in the background to match properties, send follow-ups, and hunt new opportunities around the clock.
 
-No more scrolling through WhatsApp chats or flipping through notebooks to find a listing.
-
----
-
-## 3. Client Management — Know Every Client, Every Detail
-
-Keep a complete record of every client — their name, contact number, budget, preferred area, and what kind of property they are looking for. Everything is saved in one place, so any agent in your team can pick up where another left off.
-
-No more losing client details when an agent leaves or a phone gets lost.
+The platform is designed around one core belief: agents should spend their time closing deals, not managing chaos.
 
 ---
 
-## 4. AI Property Matching — Let the System Find the Right Property
+## The Problem
 
-This is where PropFlow AI becomes truly powerful. When you add a new client, the system automatically looks through all your listings and finds the properties that best match what that client is looking for — based on their budget, preferred location, and property type.
+Pakistan has over 50,000 real estate agencies. The vast majority run their entire business through WhatsApp groups, Excel sheets, and paper diaries. There is no affordable, locally-built CRM that understands how Pakistani agents work, how they communicate, and what they need.
 
-Instead of manually going through hundreds of listings, PropFlow does it for you in seconds and shows you the top matches.
+The result:
 
----
-
-## 5. Sales Pipeline — Always Know Where Every Deal Stands
-
-The sales pipeline gives you a clear, visual picture of every deal your agency is working on. Each client moves through stages:
-
-- **New Lead** — someone just showed interest
-- **Contacted** — your agent has reached out
-- **Site Visit** — the client has visited the property
-- **Negotiation** — price and terms are being discussed
-- **Closed** — deal done!
-
-At any moment, you can see exactly where every deal is and what needs your attention next. No deal falls through the cracks.
+- Client details get lost when agents change phones or leave the agency
+- Properties are manually matched to clients, taking hours of work
+- Follow-ups are forgotten because there is no system to track them
+- Agency owners have no visibility into how their team is performing
+- Deals fall through simply because no one followed up in time
 
 ---
 
-## 6. Automated Follow-Up Messages — Stay in Touch Without the Effort
+## The Solution
 
-Following up with clients is one of the most important — and most forgotten — parts of selling property. PropFlow AI writes personalized follow-up messages for each client based on their profile and the properties they are interested in.
-
-You just review and send. The message sounds personal because it is written specifically for that client — not a copy-paste template.
-
-These messages can be sent over WhatsApp, so it fits right into how you already communicate.
+PropFlow AI is a platform where every part of the sales process — from listing a property to closing a deal — is managed in one place, with an AI agent that actively works to move deals forward without waiting for a human to initiate.
 
 ---
 
-## 7. Agency Dashboard — Your Business at a Glance
+## Core Features
 
-The dashboard gives you a clear summary of how your agency is performing:
+### 1. Agency Workspace & Team Management
 
-- How many properties are listed
-- How many active clients you have
-- How many deals are in progress
-- How much total deal value is in your pipeline
-- How many deals have been closed
+When an agency signs up, PropFlow creates a private workspace exclusively for that agency. The agency owner can invite agents and team members, assign roles, and ensure everyone works from the same shared platform.
 
-Whether you are the agency owner or a senior agent, the dashboard tells you the health of your business in one look — without needing to ask anyone or dig through files.
+No two agencies can see each other's data. Every workspace is completely private and isolated.
 
 ---
 
-## 8. Smart Search — Find What You Need, the Way You Think
+### 2. Property Listings Management
 
-Instead of filling in filters and dropdown menus, you can simply type what you are looking for in plain language:
+Agents can add, edit, and manage all property listings in one place. Each listing stores the full details — location, price, size, number of rooms, photos, and any additional notes.
 
-*"3-bedroom apartment in DHA Lahore under 80 lakh"*
-
-PropFlow understands what you mean and shows you the matching properties immediately. It works the way your brain works.
+Properties can be searched and filtered instantly, so finding the right listing takes seconds instead of minutes of scrolling through WhatsApp chats.
 
 ---
 
-## 9. The Autonomous Deal Closer — Your AI Agent That Works While You Sleep
+### 3. Client Management
 
-This is what makes PropFlow unlike anything else available to Pakistani real estate agencies today.
+Every client gets a dedicated profile — name, contact number, budget, preferred area, and property requirements. All interactions and updates are stored against that profile so any agent in the team can pick up where another left off.
 
-Here is what happens when you list a new property at 10pm and go to sleep:
-
-- PropFlow scans every client in your database and ranks them by how well they match this property
-- It writes a different, personalized message for each interested client — not a copy-paste blast, but a message that speaks to *their* budget, *their* preferred area, *their* specific needs
-- Those messages go out on WhatsApp automatically
-- When a client replies with interest, PropFlow responds and offers available time slots for a site visit
-- The client picks a slot and your calendar gets updated
-- You wake up to a booked appointment — without having sent a single message yourself
-
-Your only job is to show up, show the property, and close the deal. Everything before that moment is handled.
-
-This is not automation for the sake of automation. It is your agency running sales at full speed even when your team is off the clock.
+No client detail is ever lost, even when agents leave or change devices.
 
 ---
 
-## 10. WhatsApp as Your Office — No New App to Learn
+### 4. AI Property Matching
 
-Your agents already live on WhatsApp. PropFlow does not ask them to change that.
+When a new client is added, PropFlow automatically scans all listings and identifies the properties that best match that client's requirements — based on budget, location preference, property type, and size.
 
-Agents can interact with PropFlow entirely through WhatsApp:
-
-- Forward a client's message → PropFlow reads it and creates or updates that client's profile automatically
-- Forward a voice note from a client → PropFlow listens to it, understands the requirements in Urdu or Roman Urdu, and saves them
-- Ask PropFlow *"kaun si property Ahmed ke liye suitable hai?"* → it replies with the top matches instantly
-
-The full web platform is there for agency owners who want to see the big picture. But for agents on the ground, PropFlow fits right into the tool they already use every day.
+Agents are presented with ranked matches instantly, eliminating the need to manually go through hundreds of listings.
 
 ---
 
-## 11. Understands How Pakistanis Actually Talk About Property
+### 5. Sales Pipeline
 
-Most software is built for English and formal language. PropFlow AI is built for the way property conversations actually happen in Pakistan.
+A visual board that shows every active deal and exactly where it stands. Deals move through the following stages:
 
-Whether your client says *"ek kanal ka ghar chahiye DHA mein, budget teen crore hai"* or types it in Roman Urdu in a WhatsApp message — PropFlow understands it, extracts the requirements, and acts on them.
+- **New Lead** — initial interest received
+- **Contacted** — agent has reached out
+- **Site Visit** — client has visited the property
+- **Negotiation** — price and terms under discussion
+- **Closed** — deal successfully completed
 
-No forms to fill. No dropdowns to select. Just natural conversation.
+At any point, agents and owners can see the full picture of what is in progress and what needs attention.
 
 ---
 
+### 6. Automated Follow-Up Messages
+
+PropFlow AI writes personalized follow-up messages for each client based on their profile, their requirements, and the properties they have shown interest in. These are not templates — each message is written specifically for that client.
+
+Agents review and send. The message goes out over WhatsApp or email, fitting naturally into how agents already communicate.
+
 ---
 
-## 12. AI Chat — Talk to Your Agency, Get Anything Done
+### 7. Autonomous Deal Closer
 
-PropFlow includes a built-in chat interface where agents and owners can have a real conversation with the AI — just like chatting with a knowledgeable colleague who knows everything about your business.
+This is the defining feature of PropFlow AI.
 
-Ask it anything:
+When a new property is listed, PropFlow immediately identifies the clients who are the best match, writes a personalized pitch for each one, and sends those messages automatically over WhatsApp — without the agent needing to do anything.
 
-- *"Which of my clients would be interested in this new Bahria Town listing?"*
-- *"Draft a follow-up message for Ahmed in Urdu"*
+When a client replies with interest, PropFlow responds with available site visit slots. When the client confirms a slot, the agent's calendar is updated automatically.
+
+The agent's role is to show up, present the property, and close. Everything before that moment is handled.
+
+---
+
+### 8. AI Chat Interface
+
+A conversational interface inside PropFlow where agents and owners can ask questions and get things done through natural conversation — like having a colleague who knows everything about the agency.
+
+Examples of what agents can ask:
+
+- *"Which of my clients would be interested in this new listing?"*
+- *"Draft a follow-up message for Ahmed"*
 - *"Who hasn't been contacted in the last 7 days?"*
-- *"What is the total value of deals currently in negotiation?"*
-- *"Summarize everything we know about client Sara Malik"*
+- *"What is the total value of deals in negotiation right now?"*
+- *"Summarize everything we know about Sara Malik"*
 
-PropFlow answers instantly — not with generic information, but with answers based on **your agency's own clients, listings, and pipeline.**
-
-No menus to navigate. No reports to pull. No waiting for a manager to respond. Just ask, and PropFlow tells you or does it for you.
-
-This is the feature that ties everything together. Every other capability in PropFlow — matching, follow-ups, pipeline tracking, deal scoring — becomes accessible through a single conversation.
+PropFlow responds based on that agency's own data — not generic answers. Every other feature in the platform is accessible through this single conversation window.
 
 ---
 
-## 13. PropFlow Hunts Properties For Your Clients — Across the Entire Internet *(Optional)*
+### 9. WhatsApp as the Primary Interface
 
+Agents are not required to use a web app to benefit from PropFlow. They can interact with the platform entirely through WhatsApp:
 
-Right now, every agent waits for properties to come to them. PropFlow turns this completely upside down.
+- Forward a client's message → PropFlow reads it and creates or updates that client's profile
+- Forward a client's voice note → PropFlow listens, extracts the requirements, and saves them
+- Ask a question in WhatsApp → PropFlow replies with the answer or takes the action
 
-PropFlow's AI continuously scans Zameen.com, OLX, and Facebook property groups — every place properties get listed in Pakistan. The moment a new listing appears that matches one of your client's requirements, your agent gets an instant alert with everything already summarized.
-
-Your agent reaches the seller before any other agency in the city does.
-
-Imagine calling your client and saying:
-
-*"Sir, a property just appeared 20 minutes ago in DHA Phase 6 — 1 kanal, within your budget. Should I arrange a visit?"*
-
-Your client has never received a call like that from any agent before. That single moment builds more trust than a year of follow-ups ever could.
-
-This is not a feature. This is an unfair advantage.
+The web platform is available for agency owners who want a complete view of the business. For agents on the ground, PropFlow works inside the tool they already use every day.
 
 ---
 
-## 14. Deal Probability Score — Know Who Is Ready to Buy Right Now *(Optional)*
+### 10. Voice Note Understanding
 
-Every client in your pipeline gets a live score showing how likely they are to close a deal this week.
+Agents receive voice notes from clients constantly. Instead of listening to each one and manually entering the requirements, agents simply forward the voice note to PropFlow.
 
-PropFlow watches the signals — how quickly a client replies, how many properties they have asked about, how long they have been in the pipeline, how engaged they are — and turns all of that into a simple number.
-
-**Ahmed Al-Farooqi — 84% likely to close this week.**
-
-Your agents stop guessing who to call today. PropFlow tells them exactly which clients are hot right now, so they spend their energy where it counts most.
-
-When you combine this with Feature 12, PropFlow does not just find the right property — it finds the right property at the right moment for the right client, and tells your agent exactly when to make the call.
+PropFlow listens to the note, understands what the client is asking for, and automatically saves the requirements to that client's profile. If any clarification is needed, PropFlow flags it.
 
 ---
 
-## Why PropFlow AI?
+### 11. Multilingual AI — Speaks the Way Your Team Does
 
-| The Old Way | PropFlow AI |
+PropFlow automatically detects the language of every incoming message and replies in the same language:
+
+- Type in English → PropFlow replies in English
+- Type in Urdu script → PropFlow replies in Roman Urdu (*"Bhai yeh property Ahmed ke budget mein fit hoti hai, visit arrange kar dein?"*)
+- Send a voice note in Urdu → PropFlow transcribes it and replies in Roman Urdu the same way
+
+No language settings to configure. The AI adapts automatically to however the agent or client communicates.
+
+---
+
+### 12. Email Automation
+
+Alongside WhatsApp, PropFlow sends automated follow-up emails to clients at the right moments — after a site visit, after a period of no contact, or when a new matching property is listed.
+
+Emails are written by the AI and personalized to each client, maintaining a professional and consistent communication standard across the agency.
+
+---
+
+### 13. Agency Dashboard
+
+A live summary of agency performance visible to the owner and senior agents:
+
+- Total properties listed
+- Number of active clients
+- Deals at each pipeline stage
+- Total value of deals in progress
+- Deals closed this month
+
+Everything in one view, always up to date, without needing to ask anyone or pull a report.
+
+---
+
+### 14. Location Auto-Fill
+
+When adding a property or saving a client's preferred area, PropFlow suggests and auto-completes location names as the agent types. Typing "DHA" immediately surfaces options like "DHA Phase 5, Lahore" or "DHA Phase 2, Islamabad" — the agent selects and moves on.
+
+This ensures location data is consistent across the entire platform. Clean location data means accurate property matching, reliable search results, and a pipeline that makes sense at a glance.
+
+---
+
+### 15. Smart Natural Language Search
+
+Agents can search for properties by typing naturally instead of filling in filter forms:
+
+*"3-bedroom house in DHA Lahore under 80 lakh"*
+
+PropFlow understands the query and returns matching listings immediately. It works the way people think, not the way databases are structured.
+
+---
+
+## Optional Features
+
+The following features are considered stretch goals. They will be built if time and resources allow, but are not part of the core delivery commitment.
+
+---
+
+### 15. AI Web Search for Property Hunting *(Optional)*
+
+PropFlow's AI agent can search the web in real time to find properties listed on Zameen.com, OLX, and other platforms that match a specific client's requirements.
+
+When a match is found, the agent is notified immediately with a summary — giving them the opportunity to reach the seller before any competing agency does.
+
+This turns PropFlow from a management tool into an active deal-sourcing engine.
+
+---
+
+### 16. Deal Probability Score *(Optional)*
+
+Every client in the pipeline receives a live probability score showing how likely they are to close a deal in the near term.
+
+PropFlow calculates this based on engagement signals — how quickly they reply, how many properties they have enquired about, how long they have been active, and how their behaviour has changed over time.
+
+**Example: Ahmed Al-Farooqi — 84% likely to close this week.**
+
+Agents focus their energy on the clients who are ready to act, not on guessing who to call next.
+
+---
+
+## Scope Summary
+
+### In Scope
+
+| # | Feature |
 |---|---|
-| WhatsApp groups for everything | One organized platform |
-| Excel sheets that get lost | Client records always available |
-| Manual property matching | AI finds the best match instantly |
-| Forgetting to follow up | Automated, personalized messages |
-| No idea where deals stand | Visual pipeline, always up to date |
-| Guessing business performance | Live dashboard with real numbers |
-| Sales stops when agents sleep | AI keeps working 24 hours a day |
-| Learning a new app | Works right inside WhatsApp |
-| Software that only speaks English | Understands Urdu and Roman Urdu |
+| 1 | Agency workspace and team management |
+| 2 | Property listings management |
+| 3 | Client management |
+| 4 | AI property matching |
+| 5 | Sales pipeline |
+| 6 | Automated follow-up messages |
+| 7 | Autonomous deal closer |
+| 8 | AI chat interface |
+| 9 | WhatsApp as primary interface |
+| 10 | Voice note understanding |
+| 11 | Multilingual AI (English, Urdu, Roman Urdu) |
+| 12 | Email automation |
+| 13 | Agency dashboard |
+| 14 | Location auto-fill |
+| 15 | Smart natural language search |
 
-PropFlow AI is built specifically for Pakistani real estate agencies — affordable, simple to use, and designed around the way you already work.
+### Out of Scope
+
+| # | Feature | Reason |
+|---|---|---|
+| 1 | Raw web scraping bots | Replaced by AI web search via Tavily |
+| 2 | Deal probability score | Requires historical data — deferred to post-launch |
+| 3 | Urdu voice input (real-time speech) | Needs specialized model fine-tuning |
+| 4 | Payment and billing system | Not required for prototype |
+| 5 | Mobile application | Web platform is sufficient for demonstration |
+
+---
+
+## How We Are Building It
+
+| Layer | Detail |
+|---|---|
+| **Frontend** | Next.js — UI generated and scaffolded via v0.dev |
+| **Backend** | Python, FastAPI — initialized with `uv init backend --package` |
+| **Backend Tooling** | Built using Claude Code |
+| **Database** | AWS (Amazon Web Services) |
 
 ---
 
