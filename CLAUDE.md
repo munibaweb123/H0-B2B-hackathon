@@ -28,7 +28,38 @@ Never pick a stack component without asking first.
 ---
 
 ## Conventions
-<!-- Established during Phase 1 and updated by /sc.sync after each phase -->
+
+### Established in Phase 01 — Foundation
+
+**Folder structure**
+```
+backend/src/backend/
+├── core/       # config, database, auth
+├── models/     # SQLModel table classes
+├── routers/    # FastAPI route handlers (thin — call services)
+├── schemas/    # Pydantic request/response models
+└── main.py     # App entry point, lifespan, middleware
+```
+
+**Patterns**
+- All models inherit `SQLModel, table=True` — no raw SQLAlchemy models
+- Every model has `tenant_id: UUID` — no exceptions
+- Routers are thin: they validate input, call a service or query directly, return response
+- `get_session` and `get_current_user` are FastAPI dependencies injected into every protected router
+- All secrets loaded via `Settings` (pydantic-settings) from `.env` at project root
+- `uv run uvicorn backend.main:app` is the server start command, run from `backend/` directory
+
+**Do not:**
+- Mix raw SQLAlchemy with SQLModel
+- Hardcode any secret or config value
+- Use `datetime.now(timezone.utc)` — asyncpg expects naive datetimes, use `datetime.utcnow()`
+- Use `passlib` — incompatible with bcrypt 4.x; use `bcrypt` directly
+
+**Password hashing**
+Use `bcrypt.hashpw` / `bcrypt.checkpw` directly (passlib removed due to bcrypt 4.x incompatibility)
+
+**WhatsApp**
+Using `pywa` library. Credentials: access token, verify token, app ID/secret, phone number ID, business account ID, callback URL, API version — all in `.env`
 
 ---
 
