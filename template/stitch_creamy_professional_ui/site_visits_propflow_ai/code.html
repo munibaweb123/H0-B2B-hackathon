@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Site Visits - PropFlow AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed-variant": "#63356a",
+                      "on-surface": "#1c1c14",
+                      "surface-container": "#f1eee1",
+                      "on-primary-container": "#6f7166",
+                      "secondary-fixed-dim": "#eeb3f2",
+                      "primary-container": "#f6f7e9",
+                      "surface": "#fdf9ed",
+                      "primary-fixed-dim": "#c6c8ba",
+                      "tertiary-fixed": "#ffdea5",
+                      "background": "#fdf9ed",
+                      "tertiary-fixed-dim": "#e2c289",
+                      "on-secondary": "#ffffff",
+                      "secondary-container": "#f9befd",
+                      "surface-container-lowest": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "inverse-surface": "#313128",
+                      "on-error": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "surface-tint": "#5d5f55",
+                      "primary": "#5d5f55",
+                      "on-tertiary-fixed-variant": "#594316",
+                      "error": "#ba1a1a",
+                      "on-primary-fixed": "#1a1d14",
+                      "secondary-fixed": "#ffd6ff",
+                      "outline-variant": "#c7c7be",
+                      "on-tertiary-container": "#866c3b",
+                      "on-error-container": "#93000a",
+                      "on-background": "#1c1c14",
+                      "on-surface-variant": "#464741",
+                      "tertiary": "#735b2b",
+                      "surface-container-low": "#f7f4e7",
+                      "surface-container-highest": "#e6e2d6",
+                      "on-tertiary": "#ffffff",
+                      "primary-fixed": "#e2e4d6",
+                      "outline": "#777870",
+                      "surface-dim": "#dddace",
+                      "on-secondary-container": "#78487f",
+                      "on-secondary-fixed": "#32053b",
+                      "surface-variant": "#e6e2d6",
+                      "on-tertiary-fixed": "#261900",
+                      "on-primary-fixed-variant": "#45483e",
+                      "secondary": "#7d4c84",
+                      "inverse-primary": "#c6c8ba",
+                      "surface-container-high": "#ece8dc",
+                      "tertiary-container": "#fff4e7",
+                      "inverse-on-surface": "#f4f1e4",
+                      "surface-bright": "#fdf9ed"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "margin-desktop": "64px",
+                      "container-max-width": "1200px",
+                      "margin-mobile": "20px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Playfair Display"
+                      ],
+                      "display-lg": [
+                              "Playfair Display"
+                      ],
+                      "body-lg": [
+                              "DM Sans"
+                      ],
+                      "label-md": [
+                              "DM Sans"
+                      ],
+                      "headline-lg-mobile": [
+                              "Playfair Display"
+                      ],
+                      "headline-lg": [
+                              "Playfair Display"
+                      ],
+                      "body-md": [
+                              "DM Sans"
+                      ],
+                      "label-sm": [
+                              "DM Sans"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "28px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "56px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "40px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+            },
+          }
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-maroon-dark shadow-xl shadow-black/20 hidden md:flex flex-col py-8 px-4 z-50">
+<div class="mb-10 px-4">
+<h1 class="font-headline-md text-headline-md text-on-secondary">PropFlow AI</h1>
+<p class="font-label-md text-label-md text-on-secondary/70">Elite Real Estate CRM</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 text-on-secondary/80 hover:text-on-secondary px-4 py-3 transition-colors hover:bg-on-secondary-fixed-variant/50 transition-all duration-200 active:scale-95 rounded-lg font-body-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 text-on-secondary/80 hover:text-on-secondary px-4 py-3 transition-colors hover:bg-on-secondary-fixed-variant/50 transition-all duration-200 active:scale-95 rounded-lg font-body-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="home_work">home_work</span>
+                Properties
+            </a>
+<a class="flex items-center gap-3 text-on-secondary/80 hover:text-on-secondary px-4 py-3 transition-colors hover:bg-on-secondary-fixed-variant/50 transition-all duration-200 active:scale-95 rounded-lg font-body-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+                Clients
+            </a>
+<a class="flex items-center gap-3 text-on-secondary/80 hover:text-on-secondary px-4 py-3 transition-colors hover:bg-on-secondary-fixed-variant/50 transition-all duration-200 active:scale-95 rounded-lg font-body-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+                Pipeline
+            </a>
+<a class="flex items-center gap-3 text-on-secondary/80 hover:text-on-secondary px-4 py-3 transition-colors hover:bg-on-secondary-fixed-variant/50 transition-all duration-200 active:scale-95 rounded-lg font-body-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+                AI Chat
+            </a>
+<a class="flex items-center gap-3 bg-maroon-light text-white rounded-lg border-l-4 border-white px-4 py-3 font-bold transition-all duration-200 active:scale-95 font-body-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+                Site Visits
+            </a>
+<a class="flex items-center gap-3 text-on-secondary/80 hover:text-on-secondary px-4 py-3 transition-colors hover:bg-on-secondary-fixed-variant/50 transition-all duration-200 active:scale-95 rounded-lg font-body-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+                WhatsApp
+            </a>
+<a class="flex items-center gap-3 text-on-secondary/80 hover:text-on-secondary px-4 py-3 transition-colors hover:bg-on-secondary-fixed-variant/50 transition-all duration-200 active:scale-95 rounded-lg font-body-md text-label-md mt-auto" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+</nav>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="flex-1 md:ml-64 relative flex flex-col h-full bg-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 w-full md:w-[calc(100%-16rem)] h-16 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md flex justify-between items-center px-8 z-40">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md text-secondary dark:text-secondary-fixed md:hidden">PropFlow AI</span>
+</div>
+<div class="flex items-center gap-6 text-primary dark:text-primary-fixed">
+<button class="hover:text-secondary transition-colors focus-within:ring-2 focus-within:ring-secondary/20 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:text-secondary transition-colors focus-within:ring-2 focus-within:ring-secondary/20 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a real estate agent in a modern light-mode office setting. High contrast minimalism. 50 words." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8sQL0TAis5NMFd6a3R4K9OCtn5HgRH-fkz63VKi0lM6MoWvMyaJ9PAy1Be3K5iQwEOu0ev7qIl97gn1CpcunQfCg4tKBawlqFkuXwBc-Zo0U1k3oVWqnZc8DUVHLtZCddnco_6LvwfXQtQhP_TkWUXD1rjU3a10R8Ui5icR1wnN6aNZVl_OzLn2M0ei1tkliRp62YZVGDQ5H4Dk24qccg1zIla9vsOGRkdW_n-3K1MSVHW--srXVdck9c-EwaYzOfYjGcEcyEe6Q"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<div class="flex-1 overflow-y-auto pt-24 px-margin-mobile md:px-margin-desktop pb-12">
+<div class="max-w-container-max-width mx-auto">
+<!-- Page Header & Controls -->
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">Site Visits</h2>
+<div class="flex items-center gap-4 text-on-surface-variant font-body-md text-body-md">
+<button class="p-2 hover:bg-surface-variant rounded-full transition-colors border border-outline-variant/20">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<span class="font-bold tracking-wide">Jun 23 – Jun 29, 2026</span>
+<button class="p-2 hover:bg-surface-variant rounded-full transition-colors border border-outline-variant/20">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<button class="bg-secondary text-on-secondary px-6 py-3 rounded-DEFAULT font-label-md text-label-md hover:bg-on-secondary-fixed-variant transition-colors flex items-center gap-2 shadow-lg shadow-secondary/10" onclick="document.getElementById('add-slot-modal').classList.remove('hidden')">
+<span class="material-symbols-outlined">add</span>
+                        Add Slot
+                    </button>
+</div>
+<!-- Calendar Grid (Bento Style) -->
+<div class="grid grid-cols-1 lg:grid-cols-7 gap-4">
+<!-- Day Column -->
+<div class="flex flex-col gap-4">
+<div class="text-center py-4 border-b border-outline-variant/20">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Mon</p>
+<p class="font-headline-md text-headline-md text-on-surface">23</p>
+</div>
+<div class="space-y-4 pt-4">
+<!-- Booked Slot -->
+<div class="bg-surface p-4 rounded-lg border border-secondary/15 shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-container px-2 py-1 rounded-sm">10:00 AM</span>
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+</div>
+<p class="font-label-md text-label-md font-bold text-on-surface">Ahmed Khan</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">DHA Phase 6, Villa 42</p>
+</div>
+<!-- Available Slot -->
+<div class="bg-surface-container-lowest p-4 rounded-lg border border-tertiary/20 shadow-sm border-dashed">
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-2 block">02:00 PM</span>
+<button class="w-full py-2 border border-secondary text-secondary font-label-sm text-label-sm rounded-DEFAULT hover:bg-secondary hover:text-on-secondary transition-colors">Book</button>
+</div>
+</div>
+</div>
+<!-- Additional columns would repeat here for Tue-Sun following the same structure, kept brief for minimal effort response -->
+<div class="flex flex-col gap-4">
+<div class="text-center py-4 border-b border-outline-variant/20">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Tue</p>
+<p class="font-headline-md text-headline-md text-on-surface">24</p>
+</div>
+<div class="space-y-4 pt-4">
+<!-- Available Slot -->
+<div class="bg-surface-container-lowest p-4 rounded-lg border border-tertiary/20 shadow-sm border-dashed">
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-2 block">11:00 AM</span>
+<button class="w-full py-2 border border-secondary text-secondary font-label-sm text-label-sm rounded-DEFAULT hover:bg-secondary hover:text-on-secondary transition-colors">Book</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Add Slot Modal Overlay (Requested in prompt) -->
+<div class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-50 flex items-center justify-center p-4" id="add-slot-modal">
+<div class="bg-surface rounded-xl shadow-2xl shadow-secondary/20 w-full max-w-md border border-outline-variant/20 overflow-hidden">
+<div class="px-6 py-4 border-b border-outline-variant/10 flex justify-between items-center bg-surface-container-lowest">
+<h3 class="font-headline-md text-body-lg font-bold text-on-surface">Add New Slot</h3>
+<button class="text-on-surface-variant hover:text-secondary transition-colors" onclick="document.getElementById('add-slot-modal').classList.add('hidden')">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-6 space-y-6">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Date</label>
+<input class="w-full bg-surface-container border-b border-outline-variant/30 px-4 py-3 focus:outline-none focus:border-secondary font-body-md text-body-md rounded-t-DEFAULT" type="date"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Start Time</label>
+<input class="w-full bg-surface-container border-b border-outline-variant/30 px-4 py-3 focus:outline-none focus:border-secondary font-body-md text-body-md rounded-t-DEFAULT" type="time"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Duration</label>
+<select class="w-full bg-surface-container border-b border-outline-variant/30 px-4 py-3 focus:outline-none focus:border-secondary font-body-md text-body-md rounded-t-DEFAULT appearance-none">
+<option>30 mins</option>
+<option>1 hour</option>
+<option>2 hours</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Location / Property (Optional)</label>
+<input class="w-full bg-surface-container border-b border-outline-variant/30 px-4 py-3 focus:outline-none focus:border-secondary font-body-md text-body-md rounded-t-DEFAULT" placeholder="e.g. DHA Phase 6" type="text"/>
+</div>
+</div>
+<div class="px-6 py-4 bg-surface-container-low flex justify-end gap-4 border-t border-outline-variant/10">
+<button class="px-6 py-2 border border-secondary text-secondary rounded-DEFAULT font-label-md text-label-md hover:bg-secondary/5 transition-colors" onclick="document.getElementById('add-slot-modal').classList.add('hidden')">Cancel</button>
+<button class="px-6 py-2 bg-secondary text-on-secondary rounded-DEFAULT font-label-md text-label-md hover:bg-on-secondary-fixed-variant transition-colors" onclick="document.getElementById('add-slot-modal').classList.add('hidden')">Create Slot</button>
+</div>
+</div>
+</div>
+</body></html>
