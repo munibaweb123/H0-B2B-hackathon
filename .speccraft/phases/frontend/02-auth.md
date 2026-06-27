@@ -3,7 +3,7 @@
 **Branch:** `feature/frontend/auth`
 **Depends on:** `feature/frontend/foundation`
 **Effort:** ~1h
-**Status:** pending
+**Status:** complete
 
 ---
 
@@ -88,10 +88,10 @@ Pre-fills invite token from URL param. Fields: Full Name, Password. "Accept Invi
 
 ## Definition of Done
 
-- [ ] `/login` page renders; submitting valid credentials stores token and redirects to `/dashboard`
-- [ ] `/login` page shows error message on invalid credentials (401 from backend)
-- [ ] `/signup` page renders; submitting creates agency and redirects to `/dashboard`
-- [ ] `/invite/[token]` page reads token from URL; submitting redirects to `/dashboard`
-- [ ] All three pages use `(auth)/layout.tsx` (no sidebar visible)
-- [ ] Authenticated user visiting `/login` is redirected to `/dashboard` (checked via `useAuth()` on mount)
-- [ ] No TypeScript errors in auth pages
+- [x] `/login` page renders; submitting valid credentials stores token and redirects to `/dashboard`
+- [x] `/login` page shows error message on invalid credentials (401 from backend)
+- [x] `/signup` page renders; submitting creates agency and redirects to `/dashboard`
+- [x] `/invite/[token]` page reads token from URL; submitting redirects to `/dashboard`
+- [x] All three pages use `(auth)/layout.tsx` (no sidebar visible)
+- [x] Authenticated user visiting `/login` is redirected to `/dashboard` (checked via `useAuth()` on mount)
+- [x] No TypeScript errors in auth pages
