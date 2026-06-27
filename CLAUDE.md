@@ -339,3 +339,38 @@ frontend/src/
 **Backend field names for auth endpoints**
 - `POST /auth/signup` → `{ agency_name, full_name, email, password }`
 - `POST /auth/accept-invite` → `{ token, full_name, password }` (spec note saying `name` was wrong — backend uses `full_name`)
+
+---
+
+### Established in Phase FE-03 — Dashboard & Properties
+
+**Shared types**
+- `frontend/src/types/index.ts` — `PropertyResponse`, `ClientResponse`, `DashboardStats`, `formatPKR()`, `STAGE_LABELS`, `STAGE_COLORS`
+- All frontend phases import shared interfaces from `@/types` — do not re-declare them in page files
+
+**PKR currency formatting**
+- `formatPKR(amount: number)` in `src/types/index.ts` — renders `Rs X Cr` (≥1Cr), `Rs X Lac` (≥1Lac), or raw commas
+- Never use raw number display for monetary values — always pass through `formatPKR`
+
+**Dashboard data pattern**
+- Dashboard page calls two independent endpoints: `GET /dashboard` (stat cards) + `GET /clients` (pipeline counts + recent activity)
+- Pipeline distribution computed client-side from `ClientResponse[]` — no dedicated endpoint exists
+- `GET /dashboard` returns `{ total_properties, active_clients, pipeline_value, deals_closed }` — no stage breakdown
+
+**Deal Closer response shape (actual, not spec)**
+- `POST /deal-closer/{id}` returns `{ property_id: str, clients_pitched: [{ client_id, name, message_preview }] }`
+- Spec said `{ pitched, visits_booked }` — that was wrong; use `clients_pitched.length` for the count shown in toast
+- No visits_booked field exists in response
+
+**PropertyForm pattern**
+- Single component handles both add (`id = undefined`) and edit (`id = UUID`) — distinguished by `id` prop presence
+- Photo URLs entered as newline-separated textarea, split on `\n` and filtered before sending `photos: string[]`
+- Location autocomplete (`LocationInput`) is an inline component in `PropertyForm.tsx` — `useState` + `useRef` debounce, no library
+- `onBlur` closes dropdown with 150ms delay to allow `onMouseDown` to fire before blur clears suggestions
+
+**Filters**
+- All property filters (city, type, status, bedrooms, price) are client-side `useState` — no re-fetch on change
+- `bedrooms === "5+"` maps to `p.bedrooms >= 5` check
+
+**Skeleton loading**
+- Use per-card `<Skeleton>` (not full-page spinner) on all data-fetching pages — import from `@/components/ui/skeleton`
