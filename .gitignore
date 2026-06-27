@@ -1,0 +1,16 @@
+# SpecCraft
+.claude/settings.local.json
+.claude/worktrees/
+.speccraft/history/
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
