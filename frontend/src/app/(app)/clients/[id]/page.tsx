@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { ChevronRight, Sparkles, MessageSquare, ArrowRight, Send, Mail, Loader2 } from "lucide-react";
-import { AppLayout } from "@/components/layout/AppLayout";
 import { StageTracker } from "@/components/clients/StageTracker";
 import { InteractionTimeline } from "@/components/clients/InteractionTimeline";
 import { MatchedPropertiesTab } from "@/components/clients/MatchedPropertiesTab";
@@ -225,43 +224,37 @@ export default function ClientDetailPage() {
 
   if (loading) {
     return (
-      <AppLayout>
-        <div className="space-y-6">
-          <Skeleton className="h-8 w-64" />
-          <Skeleton className="h-64 w-full" />
-        </div>
-      </AppLayout>
+      <div className="space-y-6">
+        <Skeleton className="h-8 w-64" />
+        <Skeleton className="h-64 w-full" />
+      </div>
     );
   }
 
   if (!client) {
     return (
-      <AppLayout>
-        <div className="text-center py-12">
-          <p className="text-text-muted">Client not found</p>
-        </div>
-      </AppLayout>
+      <div className="text-center py-12">
+        <p className="text-text-muted">Client not found</p>
+      </div>
     );
   }
 
   if (isEditMode) {
     return (
-      <AppLayout>
-        <div className="max-w-3xl mx-auto">
-          <div className="mb-6">
-            <h1 className="font-serif text-2xl font-bold text-maroon-dark">Edit Client</h1>
-            <p className="text-text-muted text-sm mt-1">
-              Update {client.full_name}&apos;s profile information.
-            </p>
-          </div>
-          <ClientForm id={clientId} initial={client} />
+      <div className="max-w-3xl mx-auto">
+        <div className="mb-6">
+          <h1 className="font-serif text-2xl font-bold text-maroon-dark">Edit Client</h1>
+          <p className="text-text-muted text-sm mt-1">
+            Update {client.full_name}&apos;s profile information.
+          </p>
         </div>
-      </AppLayout>
+        <ClientForm id={clientId} initial={client} />
+      </div>
     );
   }
 
   return (
-    <AppLayout>
+    <>
       <div className="space-y-6">
         {/* Breadcrumbs */}
         <div className="flex items-center gap-2 text-sm text-text-muted">
@@ -485,6 +478,6 @@ export default function ClientDetailPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </AppLayout>
+    </>
   );
 }

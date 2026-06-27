@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { AppLayout } from "@/components/layout/AppLayout";
 import { KanbanBoard } from "@/components/pipeline/KanbanBoard";
 import { Skeleton } from "@/components/ui/skeleton";
 import { apiGet } from "@/lib/api";
@@ -76,27 +75,23 @@ export default function PipelinePage() {
 
   if (loading) {
     return (
-      <AppLayout>
-        <div className="space-y-6">
-          <Skeleton className="h-10 w-64" />
-          <div className="flex gap-4">
-            {[...Array(5)].map((_, i) => (
-              <Skeleton key={i} className="h-96 w-80 flex-shrink-0" />
-            ))}
-          </div>
+      <div className="space-y-6">
+        <Skeleton className="h-10 w-64" />
+        <div className="flex gap-4">
+          {[...Array(5)].map((_, i) => (
+            <Skeleton key={i} className="h-96 w-80 flex-shrink-0" />
+          ))}
         </div>
-      </AppLayout>
+      </div>
     );
   }
 
   return (
-    <AppLayout>
-      <KanbanBoard
-        stages={stages}
-        clients={clients}
-        onStageChange={handleStageChange}
-        onStagesUpdated={handleStagesUpdated}
-      />
-    </AppLayout>
+    <KanbanBoard
+      stages={stages}
+      clients={clients}
+      onStageChange={handleStageChange}
+      onStagesUpdated={handleStagesUpdated}
+    />
   );
 }

@@ -3,7 +3,7 @@
 **Branch:** `feature/frontend/ai-integrations`
 **Depends on:** `feature/frontend/clients-pipeline`
 **Effort:** ~2h
-**Status:** pending
+**Status:** complete
 
 ---
 
@@ -156,15 +156,15 @@ Two sections on the page:
 
 ## Definition of Done
 
-- [ ] `/ai/chat` renders message bubbles; user can send a message and receive AI reply
-- [ ] Tool call chips appear below AI messages when `tool_calls_made` is non-empty
-- [ ] Typing indicator (animated dots) shows while awaiting AI response
-- [ ] "New Chat" button clears the conversation
-- [ ] `/whatsapp` manual send form submits and shows success toast
-- [ ] `/slots` week calendar renders available and booked slots in correct time cells
-- [ ] Booking a slot calls the correct endpoint; 409 shows "already booked" message
-- [ ] "Add Slot" modal creates a new slot and it appears in the calendar
-- [ ] `/settings` shows current user info and team members list
-- [ ] "Invite Agent" modal sends invite and shows success toast
-- [ ] No TypeScript errors in this phase's files
-- [ ] Full end-to-end flow works: add property → trigger deal closer → see WhatsApp pitch sent → client booked on calendar
+- [x] `/ai/chat` renders message bubbles; user can send a message and receive AI reply
+- [x] Tool call chips appear below AI messages when `tool_calls_made` is non-empty
+- [x] Typing indicator (animated dots) shows while awaiting AI response
+- [x] "New Chat" button clears the conversation
+- [x] `/whatsapp` manual send form submits and shows success toast
+- [x] `/slots` week calendar renders available and booked slots in correct time cells
+- [x] Booking a slot calls the correct endpoint; 409 shows "already booked" message
+- [x] "Add Slot" modal creates a new slot and it appears in the calendar
+- [x] `/settings` shows current user info and team members list
+- [x] "Invite Agent" modal sends invite and shows success toast
+- [x] No TypeScript errors in this phase's files
+- [x] Full end-to-end flow works: add property → trigger deal closer → see WhatsApp pitch sent → client booked on calendar

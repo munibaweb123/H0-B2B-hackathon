@@ -37,7 +37,7 @@ engine = create_async_engine(
     f"postgresql+asyncpg://admin@{settings.DSQL_ENDPOINT}:5432/postgres",
     echo=False,
     pool_recycle=800,
-    connect_args={"ssl": True},
+    connect_args={"ssl": "require"},
 )
 
 

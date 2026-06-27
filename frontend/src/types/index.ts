@@ -108,3 +108,27 @@ export interface DraftFollowupResponse {
   message_text: string;
   channel: string;
 }
+
+export interface SlotResponse {
+  id: string;
+  tenant_id: string;
+  agent_id: string;
+  slot_datetime: string;
+  is_booked: boolean;
+  booked_by_client_id: string | null;
+  created_at: string;
+}
+
+export interface UserResponse {
+  id: string;
+  tenant_id: string;
+  email: string;
+  full_name: string;
+  role: "owner" | "manager" | "agent";
+}
+
+export interface ChatMessageType {
+  role: "user" | "assistant";
+  content: string;
+  tool_calls?: string[];
+}

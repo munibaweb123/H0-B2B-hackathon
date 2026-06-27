@@ -1,6 +1,13 @@
-from agents import Agent, RunContextWrapper
+from agents import Agent, RunContextWrapper, set_default_openai_key
 
 from backend.ai.tools import AgentContext, ALL_TOOLS
+from backend.core.config import settings
+
+# Register the OpenAI key with the Agents SDK at import time.
+# pydantic-settings loads .env into `settings` but not os.environ, so the
+# SDK's env-var lookup finds nothing — set it explicitly here.
+if settings.OPENAI_API_KEY:
+    set_default_openai_key(settings.OPENAI_API_KEY)
 
 
 def detect_language(text: str) -> str:

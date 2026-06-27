@@ -1,7 +1,12 @@
+import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from backend.core.config import settings
 from backend.core.database import init_db
+
+# Expose secrets to SDKs that read os.environ directly (OpenAI, etc.)
+os.environ.setdefault("OPENAI_API_KEY", settings.OPENAI_API_KEY)
 
 # Import all models so SQLModel.metadata picks them up before create_all
 import backend.models.agency  # noqa: F401
