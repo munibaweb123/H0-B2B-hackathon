@@ -14,7 +14,7 @@
 | Phase | Branch | Depends On | Status |
 |---|---|---|---|
 | 01 — Foundation | `feature/frontend/foundation` | `feature/backend/foundation` | ✅ complete |
-| 02 — Auth | `feature/frontend/auth` | `feature/frontend/foundation` | ⬜ pending |
+| 02 — Auth | `feature/frontend/auth` | `feature/frontend/foundation` | ✅ complete |
 | 03 — Dashboard & Properties | `feature/frontend/dashboard-properties` | `feature/frontend/auth` | ⬜ pending |
 | 04 — Clients & Pipeline | `feature/frontend/clients-pipeline` | `feature/frontend/dashboard-properties` | ⬜ pending |
 | 05 — AI & Integrations | `feature/frontend/ai-integrations` | `feature/frontend/clients-pipeline` | ⬜ pending |

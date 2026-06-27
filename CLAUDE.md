@@ -308,3 +308,34 @@ frontend/src/
 **Dev server**
 - Start: `npm run dev` from `frontend/` directory
 - Env: `NEXT_PUBLIC_API_URL=http://localhost:8000` in `frontend/.env.local`
+
+---
+
+### Established in Phase FE-02 — Auth Screens
+
+**Layout pattern for auth pages**
+- `(auth)/layout.tsx` provides only `min-h-screen bg-cream` — no centering, no max-width constraint
+- Individual pages own their own layout (split or centered) — do not add centering to the shared layout
+
+**Split layout (login + signup)**
+- Two-column flex: left = form on `bg-cream`, right = hero panel on `bg-maroon-dark` (`hidden lg:flex`)
+- Each column is `flex-1`; hero panel is hidden on mobile
+- Form column: `px-8 py-12 lg:px-16`, contains `max-w-md` wrapper for the form content
+- Hero panel: white text, `font-serif` headline, stats grid or testimonial card with `bg-maroon-medium/30` border
+
+**Centered card (invite page)**
+- Page handles its own centering: `flex min-h-screen items-center justify-center bg-cream`
+- Card: `max-w-md rounded-2xl border border-maroon-light/20 bg-white p-10 shadow-lg`
+
+**Auth page conventions**
+- All auth pages are `'use client'` — need `useRouter` and `useAuth`
+- Single object `useState` for form fields — no per-field state splits
+- Inline validation errors: `<p className="text-sm text-pink-accent">` below each field
+- Submit error: same `<p className="text-sm text-pink-accent">` above the submit button
+- Never write to `localStorage` in page components — always call `useAuth().login(token)`
+- Call `login(token)` then immediately `router.push("/dashboard")` — never push before login
+- Authenticated user redirect: `useEffect(() => { if (user) router.replace("/dashboard") }, [router, user])`
+
+**Backend field names for auth endpoints**
+- `POST /auth/signup` → `{ agency_name, full_name, email, password }`
+- `POST /auth/accept-invite` → `{ token, full_name, password }` (spec note saying `name` was wrong — backend uses `full_name`)
