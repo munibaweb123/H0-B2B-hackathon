@@ -3,7 +3,7 @@
 **Branch:** `feature/marketing/blog`
 **Depends on:** `feature/marketing/home`
 **Effort:** ~1.5h
-**Status:** pending
+**Status:** complete
 
 ---
 
@@ -157,12 +157,12 @@ Props: `{ category, categoryColor, title, excerpt, imageSrc? }`
 
 ## Definition of Done
 
-- [ ] `/blog` renders without auth
-- [ ] Hero banner shows featured article title and "Read More" button
-- [ ] Article grid shows all 4 hardcoded articles in 2-column layout
-- [ ] Each `ArticleCard` shows category badge, title, excerpt, and "Read Article" link
-- [ ] "Read Article" click shows "coming soon" toast instead of navigating away
-- [ ] Sidebar renders: search box, newsletter form, popular topic tags, recent posts
-- [ ] Newsletter form submits and shows success toast
-- [ ] Layout collapses to single column on mobile (sidebar stacks below articles)
-- [ ] No TypeScript errors in this phase's files
+- [x] `/blog` renders without auth
+- [x] Hero banner shows featured article title and "Read More" button
+- [x] Article grid shows all 4 hardcoded articles in 2-column layout
+- [x] Each `ArticleCard` shows category badge, title, excerpt, and "Read Article" link
+- [x] "Read Article" click shows "coming soon" toast instead of navigating away
+- [x] Sidebar renders: search box, newsletter form, popular topic tags, recent posts
+- [x] Newsletter form submits and shows success toast
+- [x] Layout collapses to single column on mobile (sidebar stacks below articles)
+- [x] No TypeScript errors in this phase's files
