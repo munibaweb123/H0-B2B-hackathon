@@ -33,6 +33,8 @@ class Settings(BaseSettings):
 
     # Resend (Email)
     RESEND_API_KEY: str = ""
+    # Sandbox override: Resend free tier only delivers to the account owner's email
+    DEMO_EMAIL: str = ""
 
     # Google Places
     GOOGLE_PLACES_API_KEY: str = ""

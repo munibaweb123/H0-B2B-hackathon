@@ -63,7 +63,7 @@ async def email_followup(
             resend.Emails.send,
             {
                 "from": "PropFlow <onboarding@resend.dev>",
-                "to": [client.email],
+                "to": [settings.DEMO_EMAIL or client.email],
                 "subject": f"Property Update for {client.full_name}",
                 "text": email_text,
             },
