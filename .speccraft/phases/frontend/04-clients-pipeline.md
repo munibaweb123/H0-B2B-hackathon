@@ -3,7 +3,7 @@
 **Branch:** `feature/frontend/clients-pipeline`
 **Depends on:** `feature/frontend/dashboard-properties`
 **Effort:** ~3h
-**Status:** pending
+**Status:** complete
 
 ---
 
@@ -172,17 +172,17 @@ On mount: calls `GET /pipeline/stages` → renders one column per stage; calls `
 
 ## Definition of Done
 
-- [ ] `/clients` page loads and displays all clients in a table
-- [ ] Stage filter tabs correctly filter the client list
-- [ ] Add Client form submits and redirects to new client's detail page
-- [ ] Client Detail Overview tab shows profile + stage stepper with correct current stage highlighted
-- [ ] "Run AI Match" triggers the endpoint, shows loading, then populates Matched Properties tab
-- [ ] "Draft Follow-up" shows the AI-drafted message in a modal; agent can edit and send
-- [ ] "Move to Next Stage" calls the correct endpoint and refreshes stage display
-- [ ] Interactions tab loads on tab-activate and shows timeline
-- [ ] "Add Note" posts and appends to timeline without full page reload
-- [ ] `/pipeline` Kanban renders one column per stage from `GET /pipeline/stages`
-- [ ] Drag-and-drop moves a client card and fires `PATCH /clients/{id}/stage`
-- [ ] Kanban reverts card position and shows error toast if stage transition is rejected
-- [ ] "+ Add Stage" and Rename/Delete stage operations work and refresh the board
-- [ ] No TypeScript errors in this phase's files
+- [x] `/clients` page loads and displays all clients in a table
+- [x] Stage filter tabs correctly filter the client list
+- [x] Add Client form submits and redirects to new client's detail page
+- [x] Client Detail Overview tab shows profile + stage stepper with correct current stage highlighted
+- [x] "Run AI Match" triggers the endpoint, shows loading, then populates Matched Properties tab
+- [x] "Draft Follow-up" shows the AI-drafted message in a modal; agent can edit and send
+- [x] "Move to Next Stage" calls the correct endpoint and refreshes stage display
+- [x] Interactions tab loads on tab-activate and shows timeline
+- [x] "Add Note" posts and appends to timeline without full page reload
+- [x] `/pipeline` Kanban renders one column per stage from `GET /pipeline/stages`
+- [x] Drag-and-drop moves a client card and fires `PATCH /clients/{id}/stage`
+- [x] Kanban reverts card position and shows error toast if stage transition is rejected
+- [x] "+ Add Stage" and Rename/Delete stage operations work and refresh the board
+- [x] No TypeScript errors in this phase's files

@@ -67,3 +67,44 @@ export const STAGE_COLORS: Record<ClientResponse["stage"], string> = {
   negotiation: "bg-pink-accent/20 text-pink-accent",
   closed: "bg-green-100 text-green-700",
 };
+
+export const STAGE_ORDER: ClientResponse["stage"][] = [
+  "new_lead",
+  "contacted",
+  "site_visit",
+  "negotiation",
+  "closed",
+];
+
+export interface PipelineStage {
+  id: string;
+  tenant_id: string;
+  name: string;
+  order: number;
+  created_at: string;
+}
+
+export interface InteractionResponse {
+  id: string;
+  client_id: string;
+  tenant_id: string;
+  type: "call" | "whatsapp" | "email" | "note" | "visit";
+  notes?: string;
+  created_at: string;
+}
+
+export interface MatchedProperty {
+  property_id: string;
+  score: number;
+  reason: string;
+}
+
+export interface AIMatchResponse {
+  client_id: string;
+  matches: MatchedProperty[];
+}
+
+export interface DraftFollowupResponse {
+  message_text: string;
+  channel: string;
+}
