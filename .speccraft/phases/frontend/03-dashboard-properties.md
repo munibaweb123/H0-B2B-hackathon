@@ -3,7 +3,7 @@
 **Branch:** `feature/frontend/dashboard-properties`
 **Depends on:** `feature/frontend/auth`
 **Effort:** ~2h
-**Status:** pending
+**Status:** complete
 
 ---
 
@@ -158,13 +158,13 @@ Used on both City and Address fields in `PropertyForm.tsx`:
 
 ## Definition of Done
 
-- [ ] Dashboard loads and shows 4 stat cards with real numbers from backend
-- [ ] Dashboard pipeline distribution renders with stage counts
-- [ ] Properties grid renders all properties returned by backend
-- [ ] Client-side filters (city, type, status) narrow the grid without re-fetching
-- [ ] Add Property form submits and new property appears in list
-- [ ] Edit Property form pre-populates fields correctly
-- [ ] Deal Closer button fires `POST /deal-closer/{id}` and shows success toast
-- [ ] Location autocomplete calls backend proxy and shows suggestions on city/address fields
-- [ ] Delete property removes it from the list
-- [ ] No TypeScript errors in this phase's files
+- [x] Dashboard loads and shows 4 stat cards with real numbers from backend
+- [x] Dashboard pipeline distribution renders with stage counts
+- [x] Properties grid renders all properties returned by backend
+- [x] Client-side filters (city, type, status) narrow the grid without re-fetching
+- [x] Add Property form submits and new property appears in list
+- [x] Edit Property form pre-populates fields correctly
+- [x] Deal Closer button fires `POST /deal-closer/{id}` and shows success toast
+- [x] Location autocomplete calls backend proxy and shows suggestions on city/address fields
+- [x] Delete property removes it from the list
+- [x] No TypeScript errors in this phase's files
