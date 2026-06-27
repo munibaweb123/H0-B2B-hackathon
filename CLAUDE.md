@@ -374,3 +374,39 @@ frontend/src/
 
 **Skeleton loading**
 - Use per-card `<Skeleton>` (not full-page spinner) on all data-fetching pages — import from `@/components/ui/skeleton`
+
+---
+
+### Established in Phase FE-04 / FE-05 — Layout, AI Chat & Integrations
+
+**AppLayout is applied ONCE by the route group layout (critical)**
+- `(app)/layout.tsx` wraps every child in `<AppLayout>` — individual pages must **never** import or wrap themselves in `<AppLayout>`, or the sidebar + topnav render twice
+- Pages return their content directly (a `<div>` or `<>` fragment) — fixed retroactively in `clients/`, `clients/[id]/`, `clients/new/`, `pipeline/`
+
+**Route paths (sidebar is source of truth, not the phase spec)**
+- AI Chat lives at `/ai-chat` (spec said `/ai/chat`); Site Visits at `/site-visits` (spec said `/slots`) — use the sidebar paths so navigation links resolve
+
+**AI Chat page**
+- Full-height escape from AppLayout's `p-6`: wrap in `<div className="-m-6 flex h-[calc(100vh-4rem)]">`
+- `messages: ChatMessageType[]` in `useState`, no persistence; history sent to `POST /ai/chat` as `{ message, history: [{role, content}] }` — strip `tool_calls` before sending
+- Enter submits, Shift+Enter newlines; typing indicator = 3 `animate-bounce` dots while `loading`
+- `.hide-scrollbar` utility lives in `globals.css` (not `<style jsx>` — unsupported in App Router pages)
+
+**Slots / Site Visits**
+- Slot datetime sent as naive ISO string `"${date}T${time}:00"` (no timezone) to match Aurora DSQL `datetime.utcnow()`
+- `parseLocalDate()` in `WeekCalendar.tsx` manually parses the naive string into a local `Date` — never `new Date(str)` (would apply UTC shift)
+- Booking catches `ApiError.status === 409` explicitly → "Slot already booked — please choose another"
+
+**Settings page**
+- `GET /agency/agents` does NOT exist in backend — settings shows current user only (`GET /auth/me`) with an "Invite agents to see them here" note
+- Invite → `POST /auth/invite` with `{ email }`
+
+**Backend: OpenAI key must be registered with the Agents SDK explicitly**
+- `pydantic-settings` loads `.env` into the `settings` object but **not** into `os.environ` — the OpenAI Agents SDK's env-var lookup finds nothing and raises "Missing credentials"
+- Fix: `set_default_openai_key(settings.OPENAI_API_KEY)` at import time in `ai/agent.py`
+
+**Backend: Aurora DSQL SSL**
+- `connect_args={"ssl": "require"}` (NOT `ssl=True`) — `True` makes asyncpg hang on cert verification and times out on connect
+
+**New shared types (`src/types/index.ts`)**
+- `SlotResponse`, `UserResponse`, `ChatMessageType` added — import from `@/types`, do not re-declare
