@@ -47,8 +47,6 @@ export function KanbanBoard({ stages, clients, onStageChange, onStagesUpdated }:
 
     const clientId = draggableId;
     const newStage = destination.droppableId;
-    const oldStage = source.droppableId;
-
     // Optimistic update is disabled per spec - wait for API success
     try {
       await apiPatch(`/clients/${clientId}/stage`, { stage: newStage });

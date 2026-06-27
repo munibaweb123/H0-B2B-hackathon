@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, KeyboardEvent } from "react";
 import { ConversationSidebar } from "@/components/chat/ConversationSidebar";
 import { ChatMessage } from "@/components/chat/ChatMessage";
-import { apiPost, ApiError } from "@/lib/api";
+import { apiPost } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
 import { ChatMessageType } from "@/types";

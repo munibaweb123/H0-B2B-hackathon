@@ -157,7 +157,7 @@ export default function SignupPage() {
 
           <div className="rounded-2xl border border-maroon-medium bg-maroon-medium/30 p-6 text-left">
             <p className="mb-3 text-base font-medium text-cream leading-relaxed">
-              "PropFlow helped us close 40% more deals in the first month. The AI matching is extraordinary."
+              &ldquo;PropFlow helped us close 40% more deals in the first month. The AI matching is extraordinary.&rdquo;
             </p>
             <div className="flex items-center gap-3">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-maroon-medium text-sm font-bold text-cream">
