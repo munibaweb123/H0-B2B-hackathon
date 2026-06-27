@@ -9,16 +9,23 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ApiError, apiPost } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 
-interface LoginFormState {
+interface SignupFormState {
+  agencyName: string;
+  fullName: string;
   email: string;
   password: string;
 }
 
-export default function LoginPage() {
+export default function SignupPage() {
   const router = useRouter();
   const { login, user } = useAuth();
-  const [form, setForm] = useState<LoginFormState>({ email: "", password: "" });
-  const [errors, setErrors] = useState<Partial<LoginFormState>>({});
+  const [form, setForm] = useState<SignupFormState>({
+    agencyName: "",
+    fullName: "",
+    email: "",
+    password: "",
+  });
+  const [errors, setErrors] = useState<Partial<SignupFormState>>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -29,15 +36,23 @@ export default function LoginPage() {
   }, [router, user]);
 
   const validate = () => {
-    const nextErrors: Partial<LoginFormState> = {};
+    const nextErrors: Partial<SignupFormState> = {};
+    
+    if (!form.agencyName.trim()) {
+      nextErrors.agencyName = "Agency name is required.";
+    }
+    if (!form.fullName.trim()) {
+      nextErrors.fullName = "Your name is required.";
+    }
     if (!form.email.trim()) {
       nextErrors.email = "Email is required.";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
       nextErrors.email = "Enter a valid email address.";
     }
-
     if (!form.password) {
       nextErrors.password = "Password is required.";
+    } else if (form.password.length < 6) {
+      nextErrors.password = "Password must be at least 6 characters.";
     }
 
     setErrors(nextErrors);
@@ -56,8 +71,10 @@ export default function LoginPage() {
 
     try {
       const response = await apiPost<{ access_token: string; token_type: string }>(
-        "/auth/login",
+        "/auth/signup",
         {
+          agency_name: form.agencyName.trim(),
+          full_name: form.fullName.trim(),
           email: form.email.trim(),
           password: form.password,
         }
@@ -67,9 +84,9 @@ export default function LoginPage() {
       router.push("/dashboard");
     } catch (error) {
       if (error instanceof ApiError) {
-        setSubmitError(error.message || "Unable to sign in right now.");
+        setSubmitError(error.message || "Unable to create your account right now.");
       } else {
-        setSubmitError("Unable to sign in right now.");
+        setSubmitError("Unable to create your account right now.");
       }
     } finally {
       setIsSubmitting(false);
@@ -84,15 +101,55 @@ export default function LoginPage() {
         </div>
         <div className="space-y-2">
           <CardTitle className="font-serif text-3xl text-maroon-dark">
-            Welcome back
+            Create your agency workspace
           </CardTitle>
           <CardDescription className="text-base text-text-muted">
-            Sign in to continue managing your agency workspace.
+            Start with your agency details and become the first owner on the account.
           </CardDescription>
         </div>
       </CardHeader>
       <CardContent>
         <form className="space-y-4" onSubmit={handleSubmit} noValidate>
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-text-primary" htmlFor="agencyName">
+              Agency name
+            </label>
+            <Input
+              id="agencyName"
+              name="agencyName"
+              value={form.agencyName}
+              onChange={(event) => {
+                setForm((current) => ({ ...current, agencyName: event.target.value }));
+                if (errors.agencyName) {
+                  setErrors((current) => ({ ...current, agencyName: undefined }));
+                }
+              }}
+              className={errors.agencyName ? "border-pink-accent" : ""}
+              placeholder="Elite Realty"
+            />
+            {errors.agencyName ? <p className="text-sm text-pink-accent">{errors.agencyName}</p> : null}
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-text-primary" htmlFor="fullName">
+              Your full name
+            </label>
+            <Input
+              id="fullName"
+              name="fullName"
+              value={form.fullName}
+              onChange={(event) => {
+                setForm((current) => ({ ...current, fullName: event.target.value }));
+                if (errors.fullName) {
+                  setErrors((current) => ({ ...current, fullName: undefined }));
+                }
+              }}
+              className={errors.fullName ? "border-pink-accent" : ""}
+              placeholder="Ahmed Khan"
+            />
+            {errors.fullName ? <p className="text-sm text-pink-accent">{errors.fullName}</p> : null}
+          </div>
+
           <div className="space-y-2">
             <label className="text-sm font-medium text-text-primary" htmlFor="email">
               Email address
@@ -110,7 +167,7 @@ export default function LoginPage() {
                 }
               }}
               className={errors.email ? "border-pink-accent" : ""}
-              placeholder="agent@agency.com"
+              placeholder="owner@agency.com"
             />
             {errors.email ? <p className="text-sm text-pink-accent">{errors.email}</p> : null}
           </div>
@@ -123,7 +180,7 @@ export default function LoginPage() {
               id="password"
               name="password"
               type="password"
-              autoComplete="current-password"
+              autoComplete="new-password"
               value={form.password}
               onChange={(event) => {
                 setForm((current) => ({ ...current, password: event.target.value }));
@@ -132,7 +189,7 @@ export default function LoginPage() {
                 }
               }}
               className={errors.password ? "border-pink-accent" : ""}
-              placeholder="Enter your password"
+              placeholder="Create a password"
             />
             {errors.password ? <p className="text-sm text-pink-accent">{errors.password}</p> : null}
           </div>
@@ -148,23 +205,15 @@ export default function LoginPage() {
             className="w-full bg-maroon-medium text-white hover:bg-maroon-dark"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Signing in..." : "Sign in"}
+            {isSubmitting ? "Creating workspace..." : "Create account"}
           </Button>
         </form>
 
-        <div className="mt-6 space-y-2 text-sm text-text-muted">
-          <p>
-            New to PropFlow?{" "}
-            <Link href="/signup" className="font-medium text-maroon-medium hover:text-maroon-dark">
-              Create an agency account
-            </Link>
-          </p>
-          <p>
-            Invited by a teammate?{" "}
-            <Link href="/invite/demo" className="font-medium text-maroon-medium hover:text-maroon-dark">
-              Accept your invite
-            </Link>
-          </p>
+        <div className="mt-6 text-sm text-text-muted">
+          Already have an account?{" "}
+          <Link href="/login" className="font-medium text-maroon-medium hover:text-maroon-dark">
+            Sign in instead
+          </Link>
         </div>
       </CardContent>
     </Card>

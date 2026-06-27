@@ -2,23 +2,24 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ApiError, apiPost } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 
-interface LoginFormState {
-  email: string;
+interface InviteFormState {
+  fullName: string;
   password: string;
 }
 
-export default function LoginPage() {
+export default function InvitePage() {
   const router = useRouter();
+  const params = useParams<{ token: string }>();
   const { login, user } = useAuth();
-  const [form, setForm] = useState<LoginFormState>({ email: "", password: "" });
-  const [errors, setErrors] = useState<Partial<LoginFormState>>({});
+  const [form, setForm] = useState<InviteFormState>({ fullName: "", password: "" });
+  const [errors, setErrors] = useState<Partial<InviteFormState>>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -29,15 +30,14 @@ export default function LoginPage() {
   }, [router, user]);
 
   const validate = () => {
-    const nextErrors: Partial<LoginFormState> = {};
-    if (!form.email.trim()) {
-      nextErrors.email = "Email is required.";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-      nextErrors.email = "Enter a valid email address.";
+    const nextErrors: Partial<InviteFormState> = {};
+    if (!form.fullName.trim()) {
+      nextErrors.fullName = "Your name is required.";
     }
-
     if (!form.password) {
       nextErrors.password = "Password is required.";
+    } else if (form.password.length < 6) {
+      nextErrors.password = "Password must be at least 6 characters.";
     }
 
     setErrors(nextErrors);
@@ -56,9 +56,10 @@ export default function LoginPage() {
 
     try {
       const response = await apiPost<{ access_token: string; token_type: string }>(
-        "/auth/login",
+        "/auth/accept-invite",
         {
-          email: form.email.trim(),
+          token: params.token,
+          full_name: form.fullName.trim(),
           password: form.password,
         }
       );
@@ -67,9 +68,9 @@ export default function LoginPage() {
       router.push("/dashboard");
     } catch (error) {
       if (error instanceof ApiError) {
-        setSubmitError(error.message || "Unable to sign in right now.");
+        setSubmitError(error.message || "Unable to accept the invite right now.");
       } else {
-        setSubmitError("Unable to sign in right now.");
+        setSubmitError("Unable to accept the invite right now.");
       }
     } finally {
       setIsSubmitting(false);
@@ -84,46 +85,44 @@ export default function LoginPage() {
         </div>
         <div className="space-y-2">
           <CardTitle className="font-serif text-3xl text-maroon-dark">
-            Welcome back
+            Accept your invite
           </CardTitle>
           <CardDescription className="text-base text-text-muted">
-            Sign in to continue managing your agency workspace.
+            Set up your account details and join the agency workspace.
           </CardDescription>
         </div>
       </CardHeader>
       <CardContent>
         <form className="space-y-4" onSubmit={handleSubmit} noValidate>
           <div className="space-y-2">
-            <label className="text-sm font-medium text-text-primary" htmlFor="email">
-              Email address
+            <label className="text-sm font-medium text-text-primary" htmlFor="fullName">
+              Your full name
             </label>
             <Input
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              value={form.email}
+              id="fullName"
+              name="fullName"
+              value={form.fullName}
               onChange={(event) => {
-                setForm((current) => ({ ...current, email: event.target.value }));
-                if (errors.email) {
-                  setErrors((current) => ({ ...current, email: undefined }));
+                setForm((current) => ({ ...current, fullName: event.target.value }));
+                if (errors.fullName) {
+                  setErrors((current) => ({ ...current, fullName: undefined }));
                 }
               }}
-              className={errors.email ? "border-pink-accent" : ""}
-              placeholder="agent@agency.com"
+              className={errors.fullName ? "border-pink-accent" : ""}
+              placeholder="Ahmed Khan"
             />
-            {errors.email ? <p className="text-sm text-pink-accent">{errors.email}</p> : null}
+            {errors.fullName ? <p className="text-sm text-pink-accent">{errors.fullName}</p> : null}
           </div>
 
           <div className="space-y-2">
             <label className="text-sm font-medium text-text-primary" htmlFor="password">
-              Password
+              Create a password
             </label>
             <Input
               id="password"
               name="password"
               type="password"
-              autoComplete="current-password"
+              autoComplete="new-password"
               value={form.password}
               onChange={(event) => {
                 setForm((current) => ({ ...current, password: event.target.value }));
@@ -132,7 +131,7 @@ export default function LoginPage() {
                 }
               }}
               className={errors.password ? "border-pink-accent" : ""}
-              placeholder="Enter your password"
+              placeholder="Create a password"
             />
             {errors.password ? <p className="text-sm text-pink-accent">{errors.password}</p> : null}
           </div>
@@ -148,23 +147,15 @@ export default function LoginPage() {
             className="w-full bg-maroon-medium text-white hover:bg-maroon-dark"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Signing in..." : "Sign in"}
+            {isSubmitting ? "Accepting invite..." : "Accept invite"}
           </Button>
         </form>
 
-        <div className="mt-6 space-y-2 text-sm text-text-muted">
-          <p>
-            New to PropFlow?{" "}
-            <Link href="/signup" className="font-medium text-maroon-medium hover:text-maroon-dark">
-              Create an agency account
-            </Link>
-          </p>
-          <p>
-            Invited by a teammate?{" "}
-            <Link href="/invite/demo" className="font-medium text-maroon-medium hover:text-maroon-dark">
-              Accept your invite
-            </Link>
-          </p>
+        <div className="mt-6 text-sm text-text-muted">
+          Already have an account?{" "}
+          <Link href="/login" className="font-medium text-maroon-medium hover:text-maroon-dark">
+            Sign in instead
+          </Link>
         </div>
       </CardContent>
     </Card>
