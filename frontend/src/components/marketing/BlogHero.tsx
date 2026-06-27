@@ -1,14 +1,19 @@
+import Image from "next/image";
+
 export function BlogHero() {
   return (
     <div className="relative bg-maroon-dark text-white py-20 px-8 overflow-hidden">
-      {/* subtle background pattern */}
-      <div
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 70% 50%, #7d4c84 0%, transparent 60%)",
-        }}
+      {/* Background photo */}
+      <Image
+        src="https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=1400&q=70"
+        alt="City skyline"
+        fill
+        className="object-cover opacity-20"
+        sizes="100vw"
+        priority
       />
+      {/* gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-maroon-dark/90 to-maroon-dark/60" />
       <div className="relative max-w-3xl">
         <span className="inline-block bg-blush/20 text-blush text-xs font-semibold px-3 py-1 rounded-full mb-6 uppercase tracking-wide">
           Featured Article

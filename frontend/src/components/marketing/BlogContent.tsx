@@ -12,7 +12,7 @@ const ARTICLES = [
     title: "5 Ways AI Converts More Leads",
     excerpt:
       "Explore how artificial intelligence is transforming agency workflows, from lead scoring to automated communications and beyond.",
-    imageSrc: null,
+    imageSrc: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80",
   },
   {
     id: "2",
@@ -21,7 +21,7 @@ const ARTICLES = [
     title: "Quarterly Real Estate Market Outlook",
     excerpt:
       "Quarterly Real Estate Market Outlook. Explore how artificial intelligence informs market trends in international and local property markets.",
-    imageSrc: null,
+    imageSrc: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80",
   },
   {
     id: "3",
@@ -30,7 +30,7 @@ const ARTICLES = [
     title: "Success Story: Streamlined Operations",
     excerpt:
       "How one Lahore-based agency cut their follow-up time by 60% using PropFlow's autonomous deal closer and AI chat.",
-    imageSrc: null,
+    imageSrc: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&q=80",
   },
   {
     id: "4",
@@ -39,7 +39,7 @@ const ARTICLES = [
     title: "New Feature: Automated Site Visit Scheduling",
     excerpt:
       "PropFlow now automatically pitches matched clients, offers visit slots, and confirms bookings — all without agent intervention.",
-    imageSrc: null,
+    imageSrc: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=80",
   },
 ];
 

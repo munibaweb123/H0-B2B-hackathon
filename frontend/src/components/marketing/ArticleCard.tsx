@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Newspaper } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
@@ -29,10 +30,15 @@ export function ArticleCard({
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
       {/* Image / placeholder */}
-      <div className="h-40 bg-maroon-dark/10 flex items-center justify-center relative flex-shrink-0">
+      <div className="h-44 bg-maroon-dark/10 flex items-center justify-center relative flex-shrink-0">
         {imageSrc ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={imageSrc} alt={title} className="w-full h-full object-cover" />
+          <Image
+            src={imageSrc}
+            alt={title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 100vw, 50vw"
+          />
         ) : (
           <Newspaper className="w-8 h-8 text-maroon-dark/30" />
         )}
