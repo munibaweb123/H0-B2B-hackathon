@@ -54,7 +54,8 @@ export function WeekCalendar({
   today.setHours(0, 0, 0, 0);
 
   return (
-    <div className="grid grid-cols-7 gap-3">
+    <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+      <div className="grid min-w-[640px] grid-cols-7 gap-3">
       {days.map((day, i) => {
         const daySlots = slotsForDay(day);
         const isToday = isSameDay(day, today);
@@ -105,6 +106,7 @@ export function WeekCalendar({
           </div>
         );
       })}
+      </div>
     </div>
   );
 }

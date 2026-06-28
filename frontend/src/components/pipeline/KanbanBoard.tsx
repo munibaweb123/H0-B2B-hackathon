@@ -75,7 +75,7 @@ export function KanbanBoard({ stages, clients, onStageChange, onStagesUpdated }:
   return (
     <div className="h-full">
       {/* Board Header */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col gap-3 mb-6 sm:flex-row sm:justify-between sm:items-center">
         <div>
           <h1 className="font-serif text-2xl font-bold text-maroon-dark">Pipeline</h1>
           <p className="text-text-muted text-sm mt-1">
@@ -84,7 +84,7 @@ export function KanbanBoard({ stages, clients, onStageChange, onStagesUpdated }:
         </div>
         <Button
           onClick={() => setModalState({ open: true, mode: "add" })}
-          className="bg-maroon-dark text-white hover:bg-maroon-medium"
+          className="w-full bg-maroon-dark text-white hover:bg-maroon-medium sm:w-auto"
         >
           <Plus className="w-4 h-4 mr-2" />
           Add Stage

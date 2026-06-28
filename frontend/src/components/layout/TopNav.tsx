@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Search, ChevronDown } from "lucide-react";
+import { Search, ChevronDown, Menu } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import {
   DropdownMenu,
@@ -39,18 +39,27 @@ function getInitials(name: string): string {
     .slice(0, 2);
 }
 
-export function TopNav() {
+export function TopNav({ onMenuClick }: { onMenuClick?: () => void }) {
   const pathname = usePathname();
   const { user, logout } = useAuth();
   const title = getPageTitle(pathname);
 
   return (
-    <header className="h-16 bg-white border-b border-border flex items-center px-6 gap-4">
-      <h1 className="font-serif text-xl font-semibold text-maroon-dark flex-1">
+    <header className="flex h-16 items-center gap-3 border-b border-border bg-white px-4 sm:gap-4 sm:px-6">
+      <button
+        type="button"
+        onClick={onMenuClick}
+        aria-label="Open menu"
+        className="-ml-1 rounded-md p-2 text-maroon-dark hover:bg-maroon-dark/5 lg:hidden"
+      >
+        <Menu className="h-5 w-5" />
+      </button>
+
+      <h1 className="flex-1 truncate font-serif text-lg font-semibold text-maroon-dark sm:text-xl">
         {title}
       </h1>
 
-      <div className="relative w-64">
+      <div className="relative hidden w-64 md:block">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted" />
         <Input
           placeholder="Search..."

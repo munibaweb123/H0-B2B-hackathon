@@ -93,7 +93,7 @@ export default function AIChatPage() {
   }
 
   return (
-    <div className="-m-6 flex h-[calc(100vh-4rem)]">
+    <div className="-m-4 sm:-m-6 flex h-[calc(100vh-4rem)]">
       <ConversationSidebar onNewChat={clearChat} />
 
       <section className="flex-1 flex flex-col overflow-hidden bg-cream">

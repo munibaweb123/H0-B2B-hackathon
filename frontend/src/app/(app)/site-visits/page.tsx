@@ -129,7 +129,7 @@ export default function SiteVisitsPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 className="font-serif text-2xl font-semibold text-text-primary">
             Site Visits
@@ -152,7 +152,7 @@ export default function SiteVisitsPage() {
         </div>
         <Button
           onClick={() => setShowAddModal(true)}
-          className="bg-maroon-dark hover:bg-maroon-medium gap-2"
+          className="w-full bg-maroon-dark hover:bg-maroon-medium gap-2 sm:w-auto"
         >
           <Plus className="w-4 h-4" />
           Add Slot

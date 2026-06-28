@@ -50,26 +50,26 @@ export default function PropertiesPage() {
   return (
     <div className="space-y-6 p-6">
       {/* Header */}
-      <div className="flex items-start justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h1 className="font-serif text-2xl font-bold text-maroon-dark">Properties</h1>
           <p className="text-sm text-text-muted">Manage and track your high-value real estate listings.</p>
         </div>
-        <Button asChild className="bg-maroon-dark text-white hover:bg-maroon-medium">
+        <Button asChild className="w-full bg-maroon-dark text-white hover:bg-maroon-medium sm:w-auto">
           <Link href="/properties/new"><Plus className="mr-1.5 h-4 w-4" /> Add Property</Link>
         </Button>
       </div>
 
       {/* Filter bar */}
-      <div className="flex flex-wrap items-center gap-3 rounded-xl border border-maroon-light/20 bg-cream-card p-4">
+      <div className="grid grid-cols-2 gap-3 rounded-xl border border-maroon-light/20 bg-cream-card p-4 sm:flex sm:flex-wrap sm:items-center">
         <Input
           placeholder="City"
           value={city}
           onChange={(e) => setCity(e.target.value)}
-          className="w-36 border-maroon-light/40"
+          className="w-full border-maroon-light/40 sm:w-36"
         />
         <Select value={type} onValueChange={setType}>
-          <SelectTrigger className="w-40 border-maroon-light/40"><SelectValue placeholder="Type (All)" /></SelectTrigger>
+          <SelectTrigger className="w-full border-maroon-light/40 sm:w-40"><SelectValue placeholder="Type (All)" /></SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Type (All)</SelectItem>
             <SelectItem value="apartment">Apartment</SelectItem>
@@ -80,7 +80,7 @@ export default function PropertiesPage() {
           </SelectContent>
         </Select>
         <Select value={status} onValueChange={setStatus}>
-          <SelectTrigger className="w-40 border-maroon-light/40"><SelectValue placeholder="Status (All)" /></SelectTrigger>
+          <SelectTrigger className="w-full border-maroon-light/40 sm:w-40"><SelectValue placeholder="Status (All)" /></SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Status (All)</SelectItem>
             <SelectItem value="available">Available</SelectItem>
@@ -89,7 +89,7 @@ export default function PropertiesPage() {
           </SelectContent>
         </Select>
         <Select value={bedrooms} onValueChange={setBedrooms}>
-          <SelectTrigger className="w-36 border-maroon-light/40"><SelectValue placeholder="Bedrooms" /></SelectTrigger>
+          <SelectTrigger className="w-full border-maroon-light/40 sm:w-36"><SelectValue placeholder="Bedrooms" /></SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Bedrooms (All)</SelectItem>
             <SelectItem value="1">1</SelectItem>
@@ -104,16 +104,16 @@ export default function PropertiesPage() {
           placeholder="Min Price"
           value={minPrice}
           onChange={(e) => setMinPrice(e.target.value)}
-          className="w-32 border-maroon-light/40"
+          className="w-full border-maroon-light/40 sm:w-32"
         />
         <Input
           type="number"
           placeholder="Max Price"
           value={maxPrice}
           onChange={(e) => setMaxPrice(e.target.value)}
-          className="w-32 border-maroon-light/40"
+          className="w-full border-maroon-light/40 sm:w-32"
         />
-        <Button variant="ghost" size="sm" onClick={clearFilters} className="text-text-muted hover:text-maroon-dark">
+        <Button variant="ghost" size="sm" onClick={clearFilters} className="col-span-2 text-text-muted hover:text-maroon-dark sm:col-span-1">
           Clear All
         </Button>
       </div>

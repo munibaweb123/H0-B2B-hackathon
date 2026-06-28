@@ -47,15 +47,15 @@ export default function ClientsPage() {
   return (
     <div className="space-y-6">
         {/* Header */}
-        <div className="flex justify-between items-start">
+        <div className="flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-start">
           <div>
             <h1 className="font-serif text-2xl font-bold text-maroon-dark">Clients Pipeline</h1>
             <p className="text-text-muted text-sm mt-1">
               Manage your real estate leads and active negotiations.
             </p>
           </div>
-          <Link href="/clients/new">
-            <Button className="bg-maroon-dark text-white hover:bg-maroon-medium">
+          <Link href="/clients/new" className="w-full sm:w-auto">
+            <Button className="w-full bg-maroon-dark text-white hover:bg-maroon-medium sm:w-auto">
               <Plus className="w-4 h-4 mr-2" />
               Add Client
             </Button>
@@ -63,10 +63,10 @@ export default function ClientsPage() {
         </div>
 
         {/* Stage Filter Tabs */}
-        <div className="flex gap-1 border-b border-maroon-light/20">
+        <div className="-mx-4 flex gap-1 overflow-x-auto border-b border-maroon-light/20 px-4 sm:mx-0 sm:px-0 hide-scrollbar">
           <button
             onClick={() => setActiveFilter("all")}
-            className={`px-4 py-2 text-sm font-medium transition-colors ${
+            className={`flex-shrink-0 whitespace-nowrap px-4 py-2 text-sm font-medium transition-colors ${
               activeFilter === "all"
                 ? "border-b-2 border-pink-accent text-pink-accent"
                 : "text-text-muted hover:text-text-primary"
@@ -78,7 +78,7 @@ export default function ClientsPage() {
             <button
               key={stage}
               onClick={() => setActiveFilter(stage)}
-              className={`px-4 py-2 text-sm font-medium transition-colors ${
+              className={`flex-shrink-0 whitespace-nowrap px-4 py-2 text-sm font-medium transition-colors ${
                 activeFilter === stage
                   ? "border-b-2 border-pink-accent text-pink-accent"
                   : "text-text-muted hover:text-text-primary"
@@ -124,7 +124,8 @@ export default function ClientsPage() {
               )}
             </div>
           ) : (
-            <table className="w-full">
+            <div className="overflow-x-auto">
+            <table className="w-full min-w-[720px]">
               <thead>
                 <tr className="border-b border-maroon-light/10 bg-cream/50">
                   <th className="text-left px-4 py-3 text-xs font-semibold text-text-muted uppercase tracking-wider">
@@ -203,6 +204,7 @@ export default function ClientsPage() {
                 ))}
               </tbody>
             </table>
+            </div>
           )}
         </div>
 
